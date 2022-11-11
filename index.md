@@ -1,7 +1,7 @@
 ## Alxhill Dev Log
 
-Quick and dirty handwritten log of everything I'm working on/thinking about.
+Short log of things I'm working on/thinking about. Mostly for my own records.
 
 ### Topics
 
-[AI / ML Learning](topics/ai-ml.md)
+[AI / ML Learning](topics/ai-ml)
