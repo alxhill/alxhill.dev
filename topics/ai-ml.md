@@ -2,7 +2,6 @@
 
 Roughly reverse chronological dev-log of my journey trying to learn modern AI / ML topics.
 
-
 ### 2022-11-11
 
 * Bought Colab Pro only to try and make it run locally
