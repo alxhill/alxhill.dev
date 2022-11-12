@@ -2,6 +2,12 @@
 
 Roughly reverse chronological dev-log of my journey trying to learn modern AI / ML topics.
 
+### 2022-11-12
+
+* Colab Pro is running out fast :(
+* Still mostly using instead of learning. But feels good to be iterating fast and producing something new.
+* Python is painful, but it's true that you really couldn't do this in Java - even though PyTorch supports Java and amazingly there's a [Java Kernel](https://github.com/frankfliu/IJava) for jupyter (but imagine doing every import by hand...).
+** Maybe that's just a tooling problem - IntelliJ Notebooks anyone? With Kotlin maybe?
 ### 2022-11-11
 
 * Bought Colab Pro only to try and make it run locally (update: only sorta worked so good thing I did)
