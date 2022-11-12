@@ -7,7 +7,7 @@ Roughly reverse chronological dev-log of my journey trying to learn modern AI / 
 * Colab Pro is running out fast :(
 * Still mostly using instead of learning. But feels good to be iterating fast and producing something new.
 * Python is painful, but it's true that you really couldn't do this in Java - even though PyTorch supports Java and amazingly there's a [Java Kernel](https://github.com/frankfliu/IJava) for jupyter (but imagine doing every import by hand...).
-** Maybe that's just a tooling problem - IntelliJ Notebooks anyone? With Kotlin maybe?
+	* Maybe that's just a tooling problem - IntelliJ Notebooks anyone? With Kotlin maybe?
 * Ran out of memory on a 40GB (!!) GPU. Turns out that's mostly because the standard pipeline is not super efficient - turning on "attention slicing" was enough for now, and in future can easily shrink it down with fp16 mode.
 * Note for future self: don't forget to try the optimised swift model locally on an M1 Pro - interesting to see how it compares to the iPhone version. [Blog Post](https://liuliu.me/eyes/stretch-iphone-to-its-limit-a-2gib-model-that-can-draw-everything-in-your-pocket/), [GitHub Repo](https://github.com/liuliu/swift-diffusion)
 * *TO READ*: [Transformers from Scratch](https://peterbloem.nl/blog/transformers)
