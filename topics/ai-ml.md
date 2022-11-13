@@ -2,6 +2,12 @@
 
 Roughly reverse chronological dev-log of my journey trying to learn modern AI / ML topics.
 
+### 2022-11-13
+
+* Took some new interior photos to play with. Results so far have worked, but haven't been super impressive - not quite at InteriorAI levels. Curious what prompts/strengths he's using for that.
+* Need to build a pipeline to make this useful for comparisons - right now it's pretty hard to compare outputs properly.
+* Upscaling, inpainting/auto segmentation might be a fun next step. Should use it as a way to dive one level deeper though, rather than just plugging bits together.
+
 ### 2022-11-12
 
 * Colab Pro is running out fast :(
