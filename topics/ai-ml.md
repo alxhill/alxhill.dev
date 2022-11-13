@@ -7,6 +7,7 @@ Roughly reverse chronological dev-log of my journey trying to learn modern AI / 
 * Took some new interior photos to play with. Results so far have worked, but haven't been super impressive - not quite at InteriorAI levels. Curious what prompts/strengths he's using for that.
 * Need to build a pipeline to make this useful for comparisons - right now it's pretty hard to compare outputs properly.
 * Upscaling, inpainting/auto segmentation might be a fun next step. Should use it as a way to dive one level deeper though, rather than just plugging bits together.
+* Idea: contribute support for torch generators on MPS backend. CPU didn't work, and returning fixed results is a big blocker to using it much locally.
 
 ### 2022-11-12
 
