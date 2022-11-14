@@ -2,6 +2,10 @@
 
 Roughly reverse chronological dev-log of my journey trying to learn modern AI / ML topics.
 
+### 2022-11-14
+
+* One-image textual inversion. Results look best on anime. https://github.com/gsamokovarov/jump
+
 ### 2022-11-13
 
 * Took some new interior photos to play with. Results so far have worked, but haven't been super impressive - not quite at InteriorAI levels. Curious what prompts/strengths he's using for that.
