@@ -9,6 +9,7 @@ Roughly reverse chronological dev-log of my journey trying to learn modern AI / 
 * Looks like the API is implemented in C++ (Generator.cpp is the class that throws the error).
 * Core C++ library, implementing tensors and maths is called "ATen" - https://pytorch.org/cppdocs/. I think this could hypothetically be used in place of the Python API, but is primarily designed as a layer over the C++ API.
 * Looks like it may already have been merged into an `mps_master` branch - nice that it's done, shame it's no longer a good first issue. https://github.com/kulinseth/pytorch/pull/131
+* Still lots of MPS operators needing implementation in the "good first issue" tag, although some do seem to have PRs/reviews already. Still, even if it's not that it's a good sign there are plenty of first issues to contribute. https://github.com/pytorch/pytorch/labels/good%20first%20issue
 
 
 ### 2022-11-13
