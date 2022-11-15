@@ -5,6 +5,11 @@ Roughly reverse chronological dev-log of my journey trying to learn modern AI / 
 ### 2022-11-14
 
 * One-image textual inversion. Results look best on anime. https://github.com/7eu7d7/DreamArtist-stable-diffusion
+* Gonna have a shot at seeing how hard it would be to get random number support on the MPS backend.
+* Looks like the API is implemented in C++ (Generator.cpp is the class that throws the error).
+* Core C++ library, implementing tensors and maths is called "ATen" - https://pytorch.org/cppdocs/. I think this could hypothetically be used in place of the Python API, but is primarily designed as a layer over the C++ API.
+* Looks like it may already have been merged into an `mps_master` branch - nice that it's done, shame it's no longer a good first issue. https://github.com/kulinseth/pytorch/pull/131
+
 
 ### 2022-11-13
 
