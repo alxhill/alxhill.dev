@@ -4,7 +4,7 @@ Roughly reverse chronological dev-log of my journey trying to learn modern AI / 
 
 ### 2022-11-14
 
-* One-image textual inversion. Results look best on anime. https://github.com/gsamokovarov/jump
+* One-image textual inversion. Results look best on anime. https://github.com/7eu7d7/DreamArtist-stable-diffusion
 
 ### 2022-11-13
 
