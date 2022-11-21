@@ -1,6 +1,11 @@
 ## AI / ML Dev Log
 
-Roughly reverse chronological dev-log of my journey trying to learn modern AI / ML topics.
+Reverse chronological dev-log of my journey trying to learn modern AI / ML topics, including collections of links and ideas I've come up with along the way.
+
+### 2022-11-20
+
+* Didn't have much time this weekend, but wanted to try going a level deeper and swapping out the scheduler in StableDiffusionPipeline. Tried to use "DPM++ 2M Karras" but it didn't seem to implement a method that the pipeline used and wasn't mentioned as one of the valid types in the StableDiffusionPipeline type annotations. Meanwhile, swapping to some other scheduler complained about using CUDA instead of CPU device and DPM didn't seem to be exported from the diffusers library at all. DDIM ignored the input image even though it was an Img2Img pipeline.
+
 
 ### 2022-11-14
 
