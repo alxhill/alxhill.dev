@@ -7,6 +7,7 @@ Reverse chronological dev-log of my journey trying to learn modern AI / ML topic
 * fast.ai course
 * Transformers from the ground up: https://peterbloem.nl/blog/transformers
 * Intro to Deep Learning (assuming knowledge of Neural Networks) - good explanation of Tensors: https://mlvu.github.io/lecture07/
+* Nice NVIDIA blog post on CNNs/other foundational DNN stuff: https://developer.nvidia.com/blog/deep-learning-nutshell-core-concepts/
 
 ### 2022-11-25
 
