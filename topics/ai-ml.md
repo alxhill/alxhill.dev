@@ -2,6 +2,20 @@
 
 Reverse chronological dev-log of my journey trying to learn modern AI / ML topics, including collections of links and ideas I've come up with along the way.
 
+### Learning Resources
+
+* fast.ai course
+* Transformers from the ground up: https://peterbloem.nl/blog/transformers
+
+### 2022-11-25
+
+* Gonna try and go one level deeper and run stable diffusion by building up the pipeline without diffusers - basing it off the scripts in the new SD2.0 repo.
+
+### 2022-11-24
+
+* Stable Diffusion 2.0! Got noisy/bad results on first-attempt with the interior design notebook. Locally the default script assumes cuda, trying it with MPS.
+* Managed to generate an image by cloning the huggingface space, haven't replicated that in Colab yet.
+
 ### 2022-11-20
 
 * Didn't have much time this weekend, but wanted to try going a level deeper and swapping out the scheduler in StableDiffusionPipeline. Tried to use "DPM++ 2M Karras" but it didn't seem to implement a method that the pipeline used and wasn't mentioned as one of the valid types in the StableDiffusionPipeline type annotations. Meanwhile, swapping to some other scheduler complained about using CUDA instead of CPU device and DPM didn't seem to be exported from the diffusers library at all. DDIM ignored the input image even though it was an Img2Img pipeline.
