@@ -18,6 +18,7 @@ Reverse chronological dev-log of my journey trying to learn modern AI / ML topic
 * Going to start experimenting with depth2img, see if it gives more interesting results for the interior design stuff.
 * As per usual, fairly annoying to get started with. Sigh.
 * Made it work with a full Gradio UI after some wrangling. Gives really good results with strength=1, meaning only the depth content is used to generate the image. This meant it happily changed the texture of the walls and the colours of the sofa (something it didn't do well before), while retaining the shape of the room. Previously it was very common for it to move the walls around in impossible ways, reducing how useful it could actually be.
+* Starting to writeup some thoughts/learnings in a blog post.
 
 ### 2022-11-25
 
