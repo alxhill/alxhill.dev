@@ -9,6 +9,12 @@ Reverse chronological dev-log of my journey trying to learn modern AI / ML topic
 * Intro to Deep Learning (assuming knowledge of Neural Networks) - good explanation of Tensors: https://mlvu.github.io/lecture07/
 * Nice NVIDIA blog post on CNNs/other foundational DNN stuff: https://developer.nvidia.com/blog/deep-learning-nutshell-core-concepts/
 
+### 2022-12-11
+
+* Working with Jake on the vid2vid stuff he uses. First task: get it running faster using a new Fast-Vid2Vid implementation we've found.
+* As per usual, Python/CUDA/dependency issues ruled the day. Did get a working Dockerfile running the code eventually, but haven't seen the actual output generated yet.
+* Additionally, will need to figure out how to make Open Pose / Dense Pose return results in near realtime (or remove them from the inputs if there's no way to achieve that, which is apparently supported by the original vid2vid at least).
+
 ### 2022-11-25
 
 * Gonna try and go one level deeper and run stable diffusion by building up the pipeline without diffusers - basing it off the scripts in the new SD2.0 repo.
