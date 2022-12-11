@@ -4,8 +4,8 @@ Short log of things I'm working on/thinking about. Mostly for my own records.
 
 ### Thought Stream / Dev Log
 
-[AI / ML Learning](topics/ai-ml)
-[Rust](topics/rust)
+* [AI / ML Learning](topics/ai-ml)
+* [Rust](topics/rust)
 
 ### Long Form Posts
 
