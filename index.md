@@ -1,4 +1,4 @@
-## Alxhill Dev Log
+## alxhill dev page
 
 Short log of things I'm working on/thinking about. Mostly for my own records.
 
