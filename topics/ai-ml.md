@@ -7,6 +7,7 @@ Reverse chronological dev-log of my journey trying to learn modern AI / ML topic
 * [fast.ai course](https://course.fast.ai)
 * [deeplearning.ai course - Andrew Ng](https://www.deeplearning.ai/courses/deep-learning-specialization/)
 * [lightnight.ai course - PyTorch DL course](https://www.deeplearning.ai/courses/deep-learning-specialization/)
+* [Coursera Deep Learning Specialization](https://www.coursera.org/specializations/deep-learning?utm_source=deeplearningai&utm_medium=institutions&utm_campaign=WebsiteCoursesDLSTopButton)
 * [Transformers from the ground up](https://peterbloem.nl/blog/transformers)
 * [Intro to Deep Learning](https://mlvu.github.io/lecture07/) (assuming knowledge of Neural Networks) - good explanation of Tensors.
 * Nice [NVIDIA blog post](https://developer.nvidia.com/blog/deep-learning-nutshell-core-concepts/) on CNNs/other foundational DNN stuff.
