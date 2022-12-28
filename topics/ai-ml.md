@@ -15,6 +15,7 @@ Reverse chronological dev-log of my journey trying to learn modern AI / ML topic
 ## 2022-12-28
 
 * Excited by the idea of a depth-first browser based editor. Going to explore more with the depth models and see what we can do regarding generated depth maps. Browsers & Three.js have good enough support for 3d rendering, so a lightweight 3d editor would make for a very powerful way to precisely design the composition for a generated image. This tool could have some useful models/depth maps for people, furniture, or even mountains/other types of backgrounds and make generating precise images very easy. So far, unclear exactly what's possible, but I think the concept is strong enough to give it a shot.
+* Depth2Img doesn't support fp16, due to `RuntimeError: "LayerNormKernelImpl" not implemented for 'Half'`. Potential PyTorch contribution? Also might be that this specific thing doesn't work well in fp16, see [this issue](https://github.com/pytorch/pytorch/issues/66707). Using full precision for now.
 
 ### 2022-12-11
 
