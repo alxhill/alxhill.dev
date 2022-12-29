@@ -12,6 +12,10 @@ Reverse chronological dev-log of my journey trying to learn modern AI / ML topic
 * [Intro to Deep Learning](https://mlvu.github.io/lecture07/) (assuming knowledge of Neural Networks) - good explanation of Tensors.
 * Nice [NVIDIA blog post](https://developer.nvidia.com/blog/deep-learning-nutshell-core-concepts/) on CNNs/other foundational DNN stuff.
 
+## 2022-12-29
+
+* A good next step for the depth-first editor would be a version of the model that allows more flexibility than the diffusers library allows for. It feels like this is outgrowing how Colab works, which makes it hard to have code across multiple files or tracked in Git. Will play around with alternatives that are more SWE-friendly.
+
 ## 2022-12-28
 
 * Excited by the idea of a depth-first browser based editor. Going to explore more with the depth models and see what we can do regarding generated depth maps. Browsers & Three.js have good enough support for 3d rendering, so a lightweight 3d editor would make for a very powerful way to precisely design the composition for a generated image. This tool could have some useful models/depth maps for people, furniture, or even mountains/other types of backgrounds and make generating precise images very easy. So far, unclear exactly what's possible, but I think the concept is strong enough to give it a shot.
