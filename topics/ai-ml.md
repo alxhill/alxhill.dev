@@ -19,7 +19,7 @@ Reverse chronological dev-log of my journey trying to learn modern AI / ML topic
 * The depth conditioning is so strong that if the prompt contradicts the depth conditioning, it basically ignores the prompt and returns something like the original image. Here's what happened using depth with strength=1 (so none of the original image is preserved) and the caption "fish swimming through water":
 ![original](/docs/assets/images/ai-ml/original-minor-changes.png)
 ![fish swimming through water](/docs/assets/images/ai-ml/fish-through-water.png)
-First is the original image (run through SD with low strength for added anonimity) and bottom is the edited. You can see some vague references to water - the carpet, the TV, and the window - but also you can clearly see a TV and a sofa and coffe table - and most notable of all, no fish in sight.
+First is the original image (run through SD with low strength for added anonimity) and bottom is the edited. You can see some vague references to water - the carpet, the TV, and the window - but also you can clearly see a TV and a sofa and coffee table - and most notable of all, no fish in sight.
 
 ### 2022-12-11
 
