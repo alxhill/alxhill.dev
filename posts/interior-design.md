@@ -7,23 +7,29 @@ _TODO: brief intro on getting quotes from designers_
 Starting small, I generated a few images with simple captions - "stylish new york apartment living room" and so on. The results were reasonable, if not particularly inspired:
 
 | ![Generated image with prompt 'new york apartment living room with stylish minimalist interior design'](/docs/assets/images/interior-design/plain-prompt.jpg) |
-| -- |
+| --- |
 
 _TODO: add another image example_
 
-Next, I wanted to see if Stable Diffusion could give us better results with images of our apartment, using img2img to adjust the style. 
+Next, I wanted to see if Stable Diffusion could come up with designs based off existing images of our apartment, using the image-to-image pipeline.
 
-Text-to-image works by generating random noise and asking Stable Diffusion to remove the noise using information from a prompt. When running the pipeline, the chosen number of steps determines how many steps the noise-removal should do to recreate the original image.
+The text-to-image process starts by generating random noise. The noise is iteratively 'removed' over a number of individual steps, creating the final image based on the prompt.
 
-Image-to-image works similarly, but instead of starting with random noise, it starts with the existing image. Alongside the step count, you can also provide a "strength" which determines how noisy Stable Diffusion should consider the image to be. It then "skips" to a later step and attempts the noise removal process using your starting image. So if you had 50 steps and a strength of 0.5, the algorithm will do the last 25 steps of its process to generate a new image. So a strength of 1 destroys the whole image, while a strength of 0 leaves it unchanged.
+Image-to-image works similarly, but instead of starting with random noise, it starts with the existing image. Alongside the step count, you can also provide a "strength" which determines how much 'noise' Stable Diffusion can remove from the image. This means it can "skip" to a later step and attempt the noise removal process from there, with the input image as its starting point. For example, if you have a 50-step process and a strength of 0.5, the algorithm will only apply the last 25 steps of the process to the starting image. The higher the strength, the more changes Stable Diffusion can make to the input.
 
 | ![Original](/docs/assets/images/interior-design/original.png) | ![Strength 0.4](/docs/assets/images/interior-design/living-bohemian-strength-0-35.png) | ![Strength 0.7](/docs/assets/images/interior-design/living-bohemian-strength-0-7.png) |
-| --- | --- | --- |
+| :---: | :---: | :---: |
 | Original | Strength 0.4 | Strength 0.7 |
 
 In the context of interior design, a higher strength value sounds desirable - you want the algorithm to paint  walls, move furniture, etc. But there's a tradeoff, because Stable Diffusion doesn't know anything about the structure of your room. It only understands pixels, and strength parameter is (roughly) telling it how many of those pixels it can change. So it's a matter of trial and error to find values that preserves the building's structure, but still changes the design enough to be interesting.
 
-You can see in the above comparison that 0.4 doesn't  make any interesting changes boyond the carpet and sofa texture, while 0.7 has removed the window entirely. After some time tweaking the parameters and ultimately ended up with usable, if not always realistic results.
+You can see in the above comparison that 0.4 only really changes the carpet and sofa texture, while 0.7 has replaced the window with a new room. As nice as that would be, I suspect our co-op board wouldn't approve. After some time tweaking the parameters I ended up with some usable, if not always realistic results.
 
 _TODO: examples of each room with different prompts_
 
+These ultimately didn't end up as interesting as I'd hoped - the large, white couch was a mainstay in almost every design, and even with explicit prompting (e.g adding "with colourful sofa" on the end) didn't provide anything useful:
+
+| ![colourful sofar](/docs/assets/images/interior-design/colorful-sofa.png) |
+| --- |
+
+When Stable Diffusion 2.0 was released, it came with a model that had been conditioned on both prompts and depth. Depth conditioning means the _structure_ of the image stays the same (so walls won't move) without having to keep any of the 
