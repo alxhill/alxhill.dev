@@ -4,12 +4,13 @@ Inspired by [@levelsio](https://twitter.com/levelsio)'s [InteriorAI](https://int
 
 _TODO: brief intro on getting quotes from designers_
 
-Starting small, I generated a few images with simple captions - "stylish new york apartment living room" and so on. The results were reasonable, if not particularly inspired:
+Starting small, I generated a few images with simple captions - "stylish new york apartment living room" and so on. The results were reasonable, if not particularly exciting.
 
-| ![Generated image with prompt 'new york apartment living room with stylish minimalist interior design'](/docs/assets/images/interior-design/plain-prompt.jpg) |
-| --- |
+I wrote a quick function to generate images in multiple styles based on a prompt - substituting in the style in 'new york apartment living room with {style} interior design'. Here are some of the more interesting outputs:
 
-_TODO: add another image example_
+| ![Generated 'minimalist' interior design image](/docs/assets/images/interior-design/plain-prompt.jpg) | ![Generated 'hipster', 'plants' interior design image](/docs/assets/images/interior-design/plain-prompt-2.png) | ![Generated 'zen', 'subtle color' interior design image](/docs/assets/images/interior-design/plain-prompt-3.jpg) |
+| :---: | :---: | :---: |
+| "minimalist" | "plants", "hipster" | "zen", "subtle color" |
 
 Next, I wanted to see if Stable Diffusion could come up with designs based off existing images of our apartment, using the image-to-image pipeline.
 
@@ -27,9 +28,9 @@ You can see in the above comparison that 0.4 only really changes the carpet and 
 
 _TODO: examples of each room with different prompts_
 
-These ultimately didn't end up as interesting as I'd hoped - the large, white couch was a mainstay in almost every design, and even with explicit prompting (e.g adding "with colourful sofa" on the end) didn't provide anything useful:
+These ultimately didn't end up as interesting as I'd hoped - the large, white couch was a mainstay in almost every design, and even adding "with colorful sofa" to the prompt didn't change it:
 
-| ![colourful sofar](/docs/assets/images/interior-design/colorful-sofa.png) |
+| ![colourful sofa](/docs/assets/images/interior-design/colorful-sofa.png) |
 | --- |
 
 When Stable Diffusion 2.0 was released, it came with a model that had been conditioned on both prompts and depth. Depth conditioning means the _structure_ of the image stays the same (so walls won't move) without having to keep any of the 
