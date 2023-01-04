@@ -38,4 +38,4 @@ These didn't end up as interesting as I'd hoped - the large, white couch was a m
 
 ## Depth Conditioning
 
-When Stable Diffusion 2.0 was released, it came with a model that had been conditioned on both prompts and depth. Depth conditioning means the _structure_ of the image stays the same (so walls won't move) without having to keep any of the 
+When Stable Diffusion 2.0 was released, it came with a model that had been conditioned on text promps, and additionally on a depth map. Depth conditioning means the _structure_ of the image stays the same (so walls won't move), but the pixels can be entirely different.
