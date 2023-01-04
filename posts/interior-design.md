@@ -6,7 +6,8 @@ _TODO: brief intro on getting quotes from designers_
 
 Starting small, I generated a few images with simple captions - "stylish new york apartment living room" and so on. The results were reasonable, if not particularly inspired:
 
-![Generated image with prompt 'new york apartment living room with stylish minimalist interior design'](/docs/assets/images/interior-design/plain-prompt.jpg)
+| ![Generated image with prompt 'new york apartment living room with stylish minimalist interior design'](/docs/assets/images/interior-design/plain-prompt.jpg) |
+| -- |
 
 _TODO: add another image example_
 
@@ -22,5 +23,7 @@ Image-to-image works similarly, but instead of starting with random noise, it st
 
 In the context of interior design, a higher strength value sounds desirable - you want the algorithm to paint  walls, move furniture, etc. But there's a tradeoff, because Stable Diffusion doesn't know anything about the structure of your room. It only understands pixels, and strength parameter is (roughly) telling it how many of those pixels it can change. So it's a matter of trial and error to find values that preserves the building's structure, but still changes the design enough to be interesting.
 
-_TODO: examples of rooms with different prompts_
+You can see in the above comparison that 0.4 doesn't  make any interesting changes boyond the carpet and sofa texture, while 0.7 has removed the window entirely. After some time tweaking the parameters and ultimately ended up with usable, if not always realistic results.
+
+_TODO: examples of each room with different prompts_
 
