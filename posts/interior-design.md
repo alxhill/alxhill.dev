@@ -8,7 +8,7 @@ _TODO: brief intro on getting quotes from designers_
 
 Starting small, I generated a few images with simple captions - "stylish new york apartment living room" and so on. The results were reasonable, if not particularly exciting.
 
-I wrote a quick function to generate images in multiple styles based on a prompt - substituting in the style in 'new york apartment living room with {style} interior design'. Here are some of the more interesting outputs:
+I wrote a quick function to generate images in multiple styles based on a prompt - substituting the style into 'new york apartment living room with {style} interior design'.
 
 | ![Generated 'minimalist' interior design image](/docs/assets/images/interior-design/plain-prompt.jpg) | ![Generated 'hipster', 'plants' interior design image](/docs/assets/images/interior-design/plain-prompt-2.png) | ![Generated 'zen', 'subtle color' interior design image](/docs/assets/images/interior-design/plain-prompt-3.jpg) |
 | :---: | :---: | :---: |
