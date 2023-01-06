@@ -26,6 +26,8 @@ Reverse chronological dev-log of my journey trying to learn modern AI / ML topic
 
 ![Profile photo depth map](/docs/assets/images/ai-ml/profile-depth.png)
 
+* ‼️ Finally started a proper repo so I can build up some proper knowledge/understanding of how all this ML code actually works 🚀 [alxhill/ah-ml-toolkit](https://github.com/alxhill/ah-ml-toolkit)
+
 ## 2022-12-29
 
 * A good next step for the depth-first editor would be a version of the model that allows more flexibility than the diffusers library allows for. It feels like this is outgrowing how Colab works, which makes it hard to have code across multiple files or tracked in Git. Will play around with alternatives that are more SWE-friendly.
