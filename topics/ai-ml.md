@@ -12,6 +12,17 @@ Reverse chronological dev-log of my journey trying to learn modern AI / ML topic
 * [Intro to Deep Learning](https://mlvu.github.io/lecture07/) (assuming knowledge of Neural Networks) - good explanation of Tensors.
 * Nice [NVIDIA blog post](https://developer.nvidia.com/blog/deep-learning-nutshell-core-concepts/) on CNNs/other foundational DNN stuff.
 
+## 2022-01-06
+
+* Downloaded and started using MiDaS directly from its own repo for depth estimation. Got it working surprisingly quickly (including using the MPS backend) locally, with decent results. 
+![Depth map of living room](/docs/assets/images/ai-ml/living-depth.png)
+Some brief tests of the different models showed the dpt_swin2_large_384 model gave the best results in a given time frame. The 512 model took 8s+, while the smaller modules were blurry and had inconsistent accuracy.
+* Strangely, on the M2 Air it ran faster on the CPU than the GPU - might be because not all operations are using GPU, PyTorch bugs, or something else. On the M1 Pro, the GPU ran slightly faster.
+* Rendering the 512 model on the GPU gave incorrect results on both devices - some shapes from the original image could be seen, but they're blurred/obscured:
+![Broken output results](/docs/assets/images/ai-ml/broken-depth.png)
+* Even the highest resolution models returned my profile pic as cardboard cutout - maybe not trained with enough resolution for faces?
+![Profile photo depth map](/docs/assets/images/ai-ml/profile-depth.png)
+
 ## 2022-12-29
 
 * A good next step for the depth-first editor would be a version of the model that allows more flexibility than the diffusers library allows for. It feels like this is outgrowing how Colab works, which makes it hard to have code across multiple files or tracked in Git. Will play around with alternatives that are more SWE-friendly.
