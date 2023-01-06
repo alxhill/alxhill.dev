@@ -15,13 +15,15 @@ Reverse chronological dev-log of my journey trying to learn modern AI / ML topic
 ## 2022-01-06
 
 * Downloaded and started using MiDaS directly from its own repo for depth estimation. Got it working surprisingly quickly (including using the MPS backend) locally, with decent results.
-![Depth map of living room](/docs/assets/images/ai-ml/living-depth.png)
 
+![Depth map of living room](/docs/assets/images/ai-ml/living-depth.png)
 * Some brief tests of the different models showed the dpt_swin2_large_384 model gave the best results in a given time frame. The 512 model took 8s+, while the smaller modules were blurry and had inconsistent accuracy.
 * Strangely, on the M2 Air it ran faster on the CPU than the GPU - might be because not all operations are using GPU, PyTorch bugs, or something else. On the M1 Pro, the GPU ran slightly faster.
 * The MPS backend returned distored results with the largest, 512 model, while the CPU version ran fine.
+
 ![Broken depth map of living room](/docs/assets/images/ai-ml/broken-depth.png)
 * Even the highest resolution models returned my profile pic as cardboard cutout - maybe not trained with enough resolution for faces?
+
 ![Profile photo depth map](/docs/assets/images/ai-ml/profile-depth.png)
 
 ## 2022-12-29
