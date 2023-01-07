@@ -12,6 +12,10 @@ Reverse chronological dev-log of my journey trying to learn modern AI / ML topic
 * [Intro to Deep Learning](https://mlvu.github.io/lecture07/) (assuming knowledge of Neural Networks) - good explanation of Tensors.
 * Nice [NVIDIA blog post](https://developer.nvidia.com/blog/deep-learning-nutshell-core-concepts/) on CNNs/other foundational DNN stuff.
 
+## 2022-01-07
+
+* Started setting up my ML toolkit repo using Poetry in an attempt to reduce the pain of conda/pip/etc and use a proper lockfile based dependency management approach. Lets see how this goes or if it's another rabbit hole...annoyingly looks like the Python community hasn't settled on any one tool (e.g there's pyenv, Pipenv, Poetry, PDM, and others all roughly in this space). Sigh. See [here](https://snarky.ca/classifying-python-virtual-environment-workflows/) for a breakdown of the options.
+
 ## 2022-01-06
 
 * Downloaded and started using MiDaS directly from its own repo for depth estimation. Got it working surprisingly quickly (including using the MPS backend) locally, with decent results.
@@ -19,10 +23,10 @@ Reverse chronological dev-log of my journey trying to learn modern AI / ML topic
 ![Depth map of living room](/docs/assets/images/ai-ml/living-depth.png)
 * Some brief tests of the different models showed the dpt_swin2_large_384 model gave the best results in a given time frame. The 512 model took 8s+, while the smaller modules were blurry and had inconsistent accuracy.
 * Strangely, on the M2 Air it ran faster on the CPU than the GPU - might be because not all operations are using GPU, PyTorch bugs, or something else. On the M1 Pro, the GPU ran slightly faster.
-* The MPS backend returned distored results with the largest, 512 model, while the CPU version ran fine.
+* The MPS backend returned distored results with the largest, 512 model, while the CPU version ran fine. Maybe a memory issue, or a PyTorch bug? Only affected the larger model which was interesting. Example:
 
 ![Broken depth map of living room](/docs/assets/images/ai-ml/broken-depth.png)
-* Even the highest resolution models returned my profile pic as cardboard cutout - maybe not trained with enough resolution for faces?
+* Even the highest resolution models returned profile pictures as cardboard cutout - maybe not trained with enough resolution for faces?
 
 ![Profile photo depth map](/docs/assets/images/ai-ml/profile-depth.png)
 
