@@ -2,6 +2,11 @@
 
 Reverse chronological dev-log of my journey trying to learn Rust.
 
+### 2023-01-13
+
+* Ray tracer is progressing slowly but nicely. Rust traits and type system seem pretty great - being able to use traits to implement core language features (e.g Drop, Deref, Add etc) seems like a powerful construct. Started dealing with some amount of memory handling - storing a list of arbitrary - but has been pretty simple so far. Hard to tell if I'm doing things in a "Rust-native" way, but I figure that'll come with time.
+* Not sure how to do polymorphism yet - `Vec<Box<dyn Hittable>>` seems to work, but also feels like something's off with it. Will keep playing around for now.
+
 ### 2022-04-01
 
 * Started working on the ray tracer while flying back to NY.
