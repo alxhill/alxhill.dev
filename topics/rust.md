@@ -2,12 +2,16 @@
 
 Reverse chronological dev-log of my journey trying to learn Rust.
 
+### 2023-01-17
+
+* Had to do some restructuring to split out the ray casting from the view plane to add support for anti-aliasing and different camera types. Feels very hard to name things, in a "is this even a sensible thing to abstract?" kind of way.
+
 ### 2023-01-16
 
 * Got the old raytracer working with some extra linking flags - still works pretty well, but surprisingly hard to convert it directly to Rust. Writing object-oriented code in Rust means spending lots of time fighting with the compiler, will be interesting to see what a more natural structure would feel like as I gain more experience.
 * Spent a long time messing around with Rc / borrows / lifetime markers to share a single struct object. In the end, the simplest solution was to skip all that and store a full copy - learnt a lot though.
 * Was hoping to get live-output showing up as the ray tracer is running. This turned out to be really quite hard, and probably requiring some of the async/threading primitives. For now, got a simple "show on screen" vs "save to disk" thing working okay.
-* Got visible output too:
+* We now have visible output:
 
 ![a red circle](/docs/assets/images/rust/output.png)
 
