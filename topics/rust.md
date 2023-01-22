@@ -2,6 +2,13 @@
 
 Reverse chronological dev-log of my journey trying to learn Rust.
 
+### 2023-01-22
+
+* Rust is fun but really quite hard. Small refactors can take ages and require a lot of rethinking of ownership - in particular, adding a reference to an Object through a Hit was a pretty painful change.
+* Nonetheless, doing more things is fun.
+
+![two spheres and a plane](/docs/assets/images/rust/output-2.png)
+
 ### 2023-01-17
 
 * Had to do some restructuring to split out the ray casting from the view plane to add support for anti-aliasing and different camera types. Feels very hard to name things, in a "is this even a sensible thing to abstract?" kind of way.
@@ -13,7 +20,7 @@ Reverse chronological dev-log of my journey trying to learn Rust.
 * Was hoping to get live-output showing up as the ray tracer is running. This turned out to be really quite hard, and probably requiring some of the async/threading primitives. For now, got a simple "show on screen" vs "save to disk" thing working okay.
 * We now have visible output:
 
-![a red circle](/docs/assets/images/rust/output.png)
+![a red circle](/docs/assets/images/rust/output-1.png)
 
 ### 2023-01-14
 
