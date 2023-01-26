@@ -4,9 +4,9 @@ Reverse chronological dev-log of my journey trying to learn Rust.
 
 ### 2023-01-22
 
-* Rust is fun but really quite hard. Small refactors can take ages and require a lot of rethinking of ownership - in particular, adding a reference to an Object through a Hit was a pretty painful change.
+* Rust is fun but really quite hard. Small refactors can take ages and require a lot of rethinking of ownership - in particular, adding a reference to an Object through a Hit meant I had to change how I stored objects everywhere (and also, because geometry structs actually generate the hit I have to do some gross stuff with Option / unwrap - a refactor for a future day).
 * Got more objects rendering and have some better structure in place to implement support for shading/lighting.
-* Val sent a great article on implementing linked lists in Rust that runs through a lot of Rust concepts: https://rust-unofficial.github.io/too-many-lists/
+* Val sent a great article on implementing linked lists in Rust that runs through a lot of Rust concepts: [https://rust-unofficial.github.io/too-many-lists/](https://rust-unofficial.github.io/too-many-lists/)
 
 ![two spheres and a plane](/docs/assets/images/rust/output-2.png)
 
