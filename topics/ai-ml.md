@@ -15,7 +15,7 @@ Reverse chronological dev-log of my journey trying to learn modern AI / ML topic
 
 ## 2022-01-07
 
-* Started setting up my ML toolkit repo using Poetry in an attempt to reduce the pain of conda/pip/etc and use a proper lockfile based dependency management approach. Lets see how this goes or if it's another rabbit hole...annoyingly looks like the Python community hasn't settled on any one tool (e.g there's pyenv, Pipenv, Poetry, PDM, and others all roughly in this space). Sigh. See [here](https://snarky.ca/classifying-python-virtual-environment-workflows/) for a breakdown of the options.
+* Started setting up my ML toolkit repo using Poetry in an attempt to reduce the pain of conda/pip/etc and use a proper lockfile based dependency management approach. Lets see how this goes or if it's another rabbit hole...annoyingly looks like the Python community hasn't settled on any one tool (e.g there's pyenv, Pipenv, Poetry, PDM, and others all roughly in this space). Sigh. See [here](https://snarky.ca/classifying-python-virtual-environment-workflows/) for a breakdown of the options and [here](https://chriswarrick.com/blog/2023/01/15/how-to-improve-python-packaging/) for an opinionated walk through them all.
 
 ## 2022-01-06
 
