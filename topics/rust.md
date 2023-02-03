@@ -1,6 +1,15 @@
 ## Rust Dev Log
 
-Reverse chronological dev-log of my journey trying to learn Rust.
+Reverse chronological dev-log of my journey learning Rust in the hopes it's useful to someone (me) someday (when I inevitably forget how I solved something a week earlier).
+
+### 2023-02-02
+
+* Some more intermediate progress that I haven't written about:
+
+![three spheres with materials](/docs/assets/images/rust/output-3.png)
+
+* Given the memory challenges I think using an arena to allocate objects might actually make most sense here. Effectively, all objects, lights, viewplanes, materials, etc are in the arena (as we know they have to live for the whole lifetime of the tracing), and rays, hits, and so on can then have precise lifetimes / ownership as the raytracing is running. This should mean I can avoid the `Arc<>` wrappers on Materials and Objects just to pass around references. Will experiment once I've added some more fun features.
+* Turned on full optimizations, saw frame-time drop from 500+ms down to ~80ms. So, I can put off learning async / threads for a little longer at least :)
 
 ### 2023-01-22
 
