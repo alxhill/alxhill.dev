@@ -5,7 +5,7 @@ Reverse chronological dev-log of my journey learning Rust in the hopes it's usef
 ### 2023-02-05
 
 * Hardest part of Rust has to be refactoring. Without a full understanding of lifetimes/etc, it's really hard to say if a structural change will make sense and pass the borrow checker. For example, it was fairly easy to move the code to using references and an arena allocator, but trying to move that allocator into the Scene object didn't work - I'm still trying to wrap my head around why and what a first-class Rust approach would be.
-* Shiny!
+* Shiny plus shadows - starting to look like a proper shiny-sphere ray tracer demo image.
 ![four shiny spheres with shadows](/docs/assets/images/rust/output-4.png)
 
 ### 2023-02-04
