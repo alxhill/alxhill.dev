@@ -2,6 +2,10 @@
 
 Reverse chronological dev-log of my journey learning Rust in the hopes it's useful to someone (me) someday (when I inevitably forget how I solved something a week earlier).
 
+### 2023-02-05
+
+* Hardest part of Rust has to be refactoring. Without a full understanding of lifetimes/etc, it's really hard to say if a structural change will make sense and pass the borrow checker. For example, it was fairly easy to move the code to using references and an arena allocator, but trying to move that allocator into the Scene object didn't work - I'm still trying to wrap my head around why and what a first-class Rust approach would be.
+
 ### 2023-02-04
 
 * Switched to arena allocation - mostly easier than expected, and basically removes all need for Arc/Box from the structs (instead, references with explicit lifetimes). However, did run into an interesting problem with the library used to display it on screen - it uses a function passed in to render, which means it has a lifetime longer than the main function. Disabling on-screen display for now, keen to figure out how to resolve this "properly".
