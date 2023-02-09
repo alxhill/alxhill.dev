@@ -2,11 +2,79 @@
 
 Reverse chronological dev-log of my journey learning Rust in the hopes it's useful to someone (me) someday (when I inevitably forget how I solved something a week earlier).
 
+### 2023-02-06
+
+I spent some time trying to solve the lifetime issue with the allocator/scene. Here's the outline of what I was trying to get working:
+
+```rust
+let scene_arena = Bump::new();
+let scene = Scene::new(&scene_alloc);
+
+let obj = scene_arena.alloc(Object:new(...));
+// other allocations
+
+scene.add_object(obj);
+
+pixel_canvas.render(move |image| => {
+    render_to(&scene, &mut CanvasTarget::new(image))
+})
+```
+
+So the state of the world is:
+* The main function creates a `scene_arena` and a `scene` that stores references to values created by the arena.
+* The pixel_canvas library takes in a closure as its render function. The closure is `FnMut + 'static`.
+* The material/light/objects are constructed directly in the main function, and moved into the arena's `alloc` method. This means they're owned by the arena, and the arena is owned by `main()`.
+* The closure is a `move` closure, meaning it moves any referenced values to be owned by the closure.
+
+This code fails to compile as `scene_arena` does not live long enough.
+
+I spent a long time trying to fix this and tried a number of solutions that didn't work.
+* Moving scene_arena into the closure isn't possible, as it's borrowed by Scene::new().
+    * We can remove that borrow - it's only used in the constructor to create two `Vec`s within the arena, not strictly necessary.
+    * But the error persists - unintuitively, I think `scene_arena.alloc()` counts as a borrow in some way and the error isn't quite descriptive enough.
+* Moving the allocator into the Scene. 
+    * This fails as the arena is created in the `new()` method so doesn't live long enough to be a part of the `Scene` object.
+    * I thought this was due to the `Vec::new_in(&arena)` borrow, but removing that just changed the original "does not live long enough" error to move from the scene_arena to the scene itself. Sad.
+* Make the Scene own the objects.
+
+Scene was defined as:
+```rust
+    #[derive(Debug)]
+    pub struct Scene<'w> {
+        pub objects: Vec<&'w Object>,
+        pub lights: Vec<&'w Light>,
+        pub bg_color: RGBColor,
+    }
+```
+So my first thought was that we could switch this to:
+```rust
+#[derive(Debug)]
+pub struct Scene {
+    pub objects: Vec<Object>,
+    pub lights: Vec<Light>,
+    pub bg_color: RGBColor,
+}
+```
+Unfortunately, it's not that simple - the definition of Object is:
+```rust
+#[derive(Debug)]
+pub struct Object {
+    pub geometry: Geometry,
+    pub material: &'w dyn Shadeable,
+}
+```
+This means that `Vec<Object>` has the same problem as `Scene` - someone needs to own the reference to the material. Generics can't help us here, as `Vec<Object<T>>` can have different values for `T`. And Rust doesn't allow `pub material: dyn Shadeable` as dynamic types can't be sized.
+
+Ultimately, I had to switch back to using `Arc<dyn Shadeable>` inside the object instead of a reference, and then was finally able to move the scene into the closure and run the render function on it. This also made me realise that the arena wasn't really doing anything here, as at the end of the day it was owned entirely by the `main()` function.
+
+Other solutions would be making own Materials and giving a reference or borrow of a material to an object when it gets created. Another day!
+
+
 ### 2023-02-05
 
 * Hardest part of Rust has to be refactoring. Without a full understanding of lifetimes/etc, it's really hard to say if a structural change will make sense and pass the borrow checker. For example, it was fairly easy to move the code to using references and an arena allocator, but trying to move that allocator into the Scene object didn't work - I'm still trying to wrap my head around why and what a first-class Rust approach would be.
 * Shiny plus shadows - starting to look like a proper shiny-sphere ray tracer demo image.
-
+ 
 ![four shiny spheres with shadows](/docs/assets/images/rust/output-4.png)
 
 ### 2023-02-04
