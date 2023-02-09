@@ -41,7 +41,7 @@ Scene was defined as:
 ```rust
     #[derive(Debug)]
     pub struct Scene<'w> {
-        pub objects: Vec<&'w Object>,
+        pub objects: Vec<&'w Object<'w>>,
         pub lights: Vec<&'w Light>,
         pub bg_color: RGBColor,
     }
@@ -58,17 +58,16 @@ pub struct Scene {
 Unfortunately, it's not that simple - the definition of Object is:
 ```rust
 #[derive(Debug)]
-pub struct Object {
+pub struct Object<'w> {
     pub geometry: Geometry,
     pub material: &'w dyn Shadeable,
 }
 ```
 This means that `Vec<Object>` has the same problem as `Scene` - someone needs to own the reference to the material. Generics can't help us here, as `Vec<Object<T>>` can have different values for `T`. And Rust doesn't allow `pub material: dyn Shadeable` as dynamic types can't be sized.
 
-Ultimately, I had to switch back to using `Arc<dyn Shadeable>` inside the object instead of a reference, and then was finally able to move the scene into the closure and run the render function on it. This also made me realise that the arena wasn't really doing anything here, as at the end of the day it was owned entirely by the `main()` function.
+Ultimately, I switched back to using `Arc<dyn Shadeable>` inside the object instead of a reference, and then was finally able to move the scene into the closure and run the render function on it. This also made me realise that the arena wasn't doing anything, as at the end of the day it was owned entirely by the `main()` function. So, I removed that, switched to constructing Arc's for the materials and making Objects that get moved directly into the Scene.
 
-Other solutions would be making own Materials and giving a reference or borrow of a material to an object when it gets created. Another day!
-
+Other solutions would be making Scene own the materials and providing a reference or borrow of a material to an object when it gets created. Still not sure how this would fit with generics though. Alternatively, could switch to using an enum implementing Shadeable for materials instead of `dyn Shadeable`, which is less efficient but avoids the `Sized` issue with dynamic traits.
 
 ### 2023-02-05
 
