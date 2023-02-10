@@ -2,6 +2,11 @@
 
 Reverse chronological dev-log of my journey learning Rust in the hopes it's useful to someone (me) someday (when I inevitably forget how I solved something a week earlier).
 
+### Resources
+
+* [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
+* [Too Many Lists](https://rust-unofficial.github.io/too-many-lists/)
+
 ### 2023-02-06
 
 I spent some time trying to solve the lifetime issue with the allocator/scene. Here's the outline of what I was trying to get working:
