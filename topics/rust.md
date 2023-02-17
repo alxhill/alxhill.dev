@@ -14,6 +14,7 @@ Decided to try compiling the current ray tracer to WASM, to see both how hard it
 * Getting it setup was surprisingly simple - good tutorial here: [https://rustwasm.github.io/docs/book/game-of-life/implementing.html](https://rustwasm.github.io/docs/book/game-of-life/implementing.html).
 * The development flow is poor - `wasm-pack` doesn't seem to integrate nicely with npm or webpack's dev server (although that may partly be because I'm using such old versions).
 * Communicating between the two languages is interesting. You can directly access Rust's memory from JS, which seems like it implicitly breaks a lot of Rust's promises. Will see what best-practices look like after I've played around with it some more.
+* It took a few hours to get the whole thing wired up and to break out OS-level dependencies (i.e the pixel canvas library for showing on-screen couldn't be compiled to wasm I believe), but once that was done it was surprisingly smooth sailing. I setup a simple `JsBuffer` implementing the same RenderTarget trait as before and read out a single pixel from it successfully - next step is to get it working fully in Canvas.
 
 ### 2023-02-06
 
