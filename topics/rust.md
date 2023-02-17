@@ -6,6 +6,14 @@ Reverse chronological dev-log of my journey learning Rust in the hopes it's usef
 
 * [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
 * [Too Many Lists](https://rust-unofficial.github.io/too-many-lists/)
+* [Polymorphism in Rust](https://oswalt.dev/2021/06/polymorphism-in-rust/)
+
+### 2023-02-15
+
+Decided to try compiling the current ray tracer to WASM, to see both how hard it is and what the perf is like.
+* Getting it setup was surprisingly simple - good tutorial here: [https://rustwasm.github.io/docs/book/game-of-life/implementing.html](https://rustwasm.github.io/docs/book/game-of-life/implementing.html).
+* The development flow is poor - `wasm-pack` doesn't seem to integrate nicely with npm or webpack's dev server (although that may partly be because I'm using such old versions).
+* Communicating between the two languages is interesting. You can directly access Rust's memory from JS, which seems like it implicitly breaks a lot of Rust's promises. Will see what best-practices look like after I've played around with it some more.
 
 ### 2023-02-06
 
