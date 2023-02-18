@@ -31,6 +31,8 @@ let pixels_array = new Uint8ClampedArray(memory.buffer, scene.pixels(), scene.wi
 
 So JavaScript effectively has full access to Rust's memory, with the data sent between the two languages via raw pointers. I'm sure there are also typed ways to do this, so will investigate that in future.
 
+When I first checked performance, it was running at about ~800ms per frame compared to ~140ms per frame when running natively. Surprisingly, this was mostly due to the console being open - when I closed it, the frame-time dropped to ~260ms per frame (see screenshot).
+
 ### 2023-02-15
 
 Decided to try compiling the current ray tracer to WASM, to see both how hard it is and what the perf is like.
