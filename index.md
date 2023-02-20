@@ -1,6 +1,6 @@
 ## alxhill dev page
 
-Short log of things I'm working on/thinking about. Mostly for my own records.
+Small site for things I'm working on/thinking about. Mostly for my own records.
 
 ### Thought Stream / Dev Log
 
@@ -9,4 +9,8 @@ Short log of things I'm working on/thinking about. Mostly for my own records.
 
 ### Long Form Posts
 
-[\[WIP\] Interior Design with Stable Diffusion](drafts/interior-design)
+_\*crickets\*_
+
+### Drafts
+
+[Interior Design with Stable Diffusion](drafts/interior-design)
