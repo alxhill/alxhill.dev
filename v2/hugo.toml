@@ -1,14 +1,18 @@
 baseURL = 'https://alxhill.dev/'
 languageCode = 'en-us'
-title = 'alxhill.dev'
+title = './alxhill.dev'
 theme = 'archie'
 copyright = "© Alexander Hill"
 googleAnalytics = "G-Z2CCEVMECY"
 paginate = 3
 
-[[params]]
-    mode = "toggle"
-    subtitle = "Development log and blog posts"
+enableGitInfo = true
+
+[params]
+mode = "toggle"
+useCDN = true
+subtitle = "Small site for things I'm working on/thinking about. Mostly for my own records."
+description = "alxhill dev page"
 
 [[menu.main]]
 name = "Home"

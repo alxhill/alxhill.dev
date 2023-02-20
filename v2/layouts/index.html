@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	{{ partial "header.html" . }}
+	<body>
+		<div class="content">
+			{{ partial "head.html" . }}
+			
+			<main>
+				<div class="site-description">
+					{{- if isset .Site.Params "subtitle" -}}
+					<p>{{ .Site.Params.Subtitle | markdownify }}</p>
+					{{- end -}}
+				</div>
+			</main>
+
+            {{ $devlogs := where .Site.RegularPages "Section" "devlogs" }}
+            <h1>Thought Stream / Dev Logs</h1>
+            <ul class="posts">
+                {{ range $devlogs }}
+                <li class="post">
+                    <a href="{{ .RelPermalink }}">{{.Title}}</a>
+                </li>
+                {{ end }}
+            </ul>
+
+
+            {{ $posts := where .Site.RegularPages "Section" "posts" }}
+            <h1>Long Form Posts</h1>
+            {{ with $posts }}
+            <ul class="posts">
+                {{ range $posts }}
+                <li class="post">
+                    <a href="{{ .RelPermalink }}">{{.Title}}</a> <span class="meta">{{ dateFormat "Jan 2, 2006" .Date }}{{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}</span>
+                </li>
+                {{ end }}
+            </ul>
+            {{ else }}
+            <p><i>*crickets*</i></p>
+            {{ end }}
+
+			{{ partial "footer.html" . }}
+		</div>
+		
+	</body>
+</html>
