@@ -8,6 +8,9 @@ paginate = 3
 
 enableGitInfo = true
 
+[frontmatter]
+lastmod = [':git']
+
 [params]
 mode = "toggle"
 useCDN = true

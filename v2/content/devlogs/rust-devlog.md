@@ -1,6 +1,5 @@
 ---
 title: Rust & Ray Tracing Devlog
-lastmod: ":git"
 ---
 
 Reverse chronological dev-log of my journey learning Rust in the hopes it's useful to someone (me) someday (when I inevitably forget how I solved something a week earlier).
