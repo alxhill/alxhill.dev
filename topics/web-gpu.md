@@ -6,6 +6,7 @@ Reverse chronological dev-log of my journey learning/using WebGPU.
 
 * [WebGPU Explainer](https://gpuweb.github.io/gpuweb/explainer/)
 * [alain.xyz WebGPU Intro Blog](https://alain.xyz/blog/raw-webgpu)
+* [Rust WebGPU Library](https://github.com/gfx-rs/wgpu)
 
 ### 2023-02-22
 
