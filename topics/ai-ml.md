@@ -12,6 +12,7 @@ Reverse chronological dev-log of my journey trying to learn modern AI / ML topic
 * [Intro to Deep Learning](https://mlvu.github.io/lecture07/) (assuming knowledge of Neural Networks) - good explanation of Tensors.
 * Nice [NVIDIA blog post](https://developer.nvidia.com/blog/deep-learning-nutshell-core-concepts/) on CNNs/other foundational DNN stuff.
 * [Hacker News thread](https://news.ycombinator.com/item?id=34312248) asking for recommended books/resources/etc. Some interesting suggestions there.
+* [GPT is 60 lines of NumPY](https://jaykmody.com/blog/gpt-from-scratch/)
 
 ## 2022-01-07
 
