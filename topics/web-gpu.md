@@ -7,6 +7,7 @@ Reverse chronological dev-log of my journey learning/using WebGPU.
 * [WebGPU Explainer](https://gpuweb.github.io/gpuweb/explainer/)
 * [alain.xyz WebGPU Intro Blog](https://alain.xyz/blog/raw-webgpu)
 * [Rust WebGPU Library](https://github.com/gfx-rs/wgpu)
+* [WGSL vs GLSL](https://dmnsgn.me/blog/from-glsl-to-wgsl-the-future-of-shaders-on-the-web/)
 
 ### 2023-02-22
 
