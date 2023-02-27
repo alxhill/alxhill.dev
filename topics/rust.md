@@ -7,6 +7,96 @@ Reverse chronological dev-log of my journey learning Rust in the hopes it's usef
 * [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
 * [Too Many Lists](https://rust-unofficial.github.io/too-many-lists/)
 * [Polymorphism in Rust](https://oswalt.dev/2021/06/polymorphism-in-rust/)
+* [Writing a ray tracer in Rust](https://blog.singleton.io/posts/2022-01-02-raytracing-with-rust/)
+
+### 2023-02-26
+
+Briefly spent some time parallelising the renderer. As a naive approach, simply used a library called `rayon` to switch from iterating over one pixel at a time to a "parallel iterator" which can handle distributing work across threads, with work-stealing to avoid downtime.
+
+There were two pain-points here:
+1. I couldn't use mutable objects when sharing them across threads. This affected the sampler (which updates an index) and the output image view.
+2. The `Scene` object couldn't safely be shared between threads as it didn't implement `Sync`.
+
+So my first attempt didn't compile:
+
+```rust
+pub fn render_parallel<R: Renderable + Send + Sync, T: RenderTarget + Send + Sync>(
+    view_plane: &mut ViewPlane,
+    mut renderer: R,
+    mut img: T,
+) {
+    ParallelIterator::for_each(view_plane.into_par_iter(), move |xy| {
+        // error: img cannot be mutably borrowed
+        img.set_pixel(&xy, &renderer.render_pixel(&xy));
+    });
+}
+```
+
+I solved the first issue by making the sampler store an `AtomicU32` instead of a raw `u32`. This means it can be mutated (safely) without needing a mutable reference. For the output image, I switched from a `for_each` to `map` + `collect`, then writing to the image buffer at the end.
+
+The compiler helpfully informed me that the issue with `Scene` not implementing `Sync` was all the way down in my `Object` type:
+
+```rust
+   = help: the trait `Sync` is not implemented for `(dyn Shadeable + 'static)`
+   = note: required for `Arc<(dyn Shadeable + 'static)>` to implement `Sync`
+   = note: required because it appears within the type `Option<Arc<(dyn Shadeable + 'static)>>`
+   = note: required because it appears within the type `Object`
+   = note: required for `Unique<Object>` to implement `Sync`
+   = note: required because it appears within the type `alloc::raw_vec::RawVec<Object>`
+   = note: required because it appears within the type `Vec<Object>`
+   = note: required because it appears within the type `rust_raytracing::Scene`
+   = note: required because it appears within the type `&rust_raytracing::Scene`
+   = note: required because it appears within the type `RenderContext<'_, rust_raytracing::MultiJittered, rust_raytracing::PinholeCamera>`
+note: required by a bound in `render_parallel`
+```
+
+The core issue is that `Object` looks like this:
+
+```rust
+#[derive(Debug)]
+pub struct Object {
+    pub geometry: Geometry,
+    pub material: Arc<dyn Shadeable>,
+}
+```
+
+Specifically, the trait `Shadeable` can be implemented by any type - including ones that are not safe to send between threads. At first I thought this was inherent in how `dyn` worked, so rewrote the Material system to be an enum instead of an `Arc`. This worked fine, but does mean that Materials have to take up much more space than they need (e.g a `Normal` material has no fields, while a `Phong` has to leave space for two lambertian BDRFs, a glossy BDRF and an optional PerfectlySpecular BDRF - a total of 5 doubles and 4 colors). At the scale of this project, that doesn't realluy matter, but it seems preferable to share materials rather than copy them around with so much extra padding.
+
+The alternative solution was much simpler - make Shadeable require `Sync + Send`. Because none of the Materials do any mutation, no other 
+
+```rust
+pub trait Shadeable: Debug + Sync + Send {
+    fn shade(&self, hit: Hit, scene: &Scene, depth: Depth) -> RGBColor;
+}
+```
+
+Now the code compiles and runs, with the following `render_parallel` implementation:
+
+```rust
+pub fn render_parallel<R: Renderable + Sync, T: RenderTarget>(
+    view_plane: &ViewPlane,
+    renderer: &R,
+    img: &mut T,
+) {
+    let pixels: Vec<(ViewXY, RGBColor)> = ParallelIterator::map(view_plane.into_par_iter(), |xy| {
+        (xy, renderer.render_pixel(&xy))
+    })
+    .collect();
+    for pixel in pixels {
+        img.set_pixel(&pixel.0, &pixel.1);
+    }
+}
+```
+
+So, is it faster? Not much!
+
+#### Performance
+
+Previously, I'd migrated from a dynamic sampling architecture (generates values on the fly) to a static one, which precomputes a buffer of samples and moves through them. This is more flexible, allowing for samplers that generate multiple values in one go (e.g MultiJittered, N-Rooks), but switching compute for memory reads has had a negative impact on performance - from about 130ms per frame to 250ms.
+
+I was hoping that using Rayon would get us some much needed perf gains for each frame, but sadly while it did reduce them by about 50ms, we're still well above where it was before and far below where you'd want to be given 8x the computing power.
+
+I haven't tested yet, but I'd assume that single pixels are too small a unit of compute to make up for the overhead of using threads - or that the `AtomicU32` is slowing things down (it does get used multiple times per-pixel at the moment).
 
 ### 2023-02-17
 
