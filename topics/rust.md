@@ -8,6 +8,7 @@ Reverse chronological dev-log of my journey learning Rust in the hopes it's usef
 * [Too Many Lists](https://rust-unofficial.github.io/too-many-lists/)
 * [Polymorphism in Rust](https://oswalt.dev/2021/06/polymorphism-in-rust/)
 * [Writing a ray tracer in Rust](https://blog.singleton.io/posts/2022-01-02-raytracing-with-rust/)
+* [Parallelism in Rust with fork-join](https://publications.lib.chalmers.se/records/fulltext/219016/219016.pdf)
 
 ### 2023-02-26
 
