@@ -8,6 +8,12 @@ Reverse chronological dev-log of my journey learning/using WebGPU.
 * [alain.xyz WebGPU Intro Blog](https://alain.xyz/blog/raw-webgpu)
 * [Rust WebGPU Library](https://github.com/gfx-rs/wgpu)
 * [WGSL vs GLSL](https://dmnsgn.me/blog/from-glsl-to-wgsl-the-future-of-shaders-on-the-web/)
+* [WebGPU Overview from some guy](https://surma.dev/things/webgpu/) - looks pretty solid
+
+### 2023-03-07
+
+* Got a basic copy-paste matmul compute shader working.
+* Found some nice demos with sample code: [https://webgpu.github.io/webgpu-samples/](https://webgpu.github.io/webgpu-samples/)
 
 ### 2023-02-22
 
