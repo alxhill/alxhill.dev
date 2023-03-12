@@ -13,7 +13,8 @@ Reverse chronological dev-log of my journey learning/using WebGPU.
 ### 2023-03-07
 
 * Got a basic copy-paste matmul compute shader working.
-* Found some nice demos with sample code: [https://webgpu.github.io/webgpu-samples/](https://webgpu.github.io/webgpu-samples/)
+* Found some nice demos with of WebGPU compute and render pipelines with sample code and shaders at [here](https://webgpu.github.io/webgpu-samples/)
+* And found a great resource in the form of a ray tracer in GLSL / Vulkan and a tutorial to go along with it [here](https://www.gsn-lib.org/docs/nodes/raytracing.php). This seems like a great starting point of something to convert to WGSL without having to figure everything out from scratch, and already handles some of the more complex RT features my Rust ray tracer supports.
 
 ### 2023-02-22
 
