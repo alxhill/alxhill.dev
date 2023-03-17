@@ -14,6 +14,12 @@ Reverse chronological dev-log of my journey trying to learn modern AI / ML topic
 * [Hacker News thread](https://news.ycombinator.com/item?id=34312248) asking for recommended books/resources/etc. Some interesting suggestions there.
 * [GPT is 60 lines of NumPY](https://jaykmody.com/blog/gpt-from-scratch/)
 
+## 2023-03-17
+
+My explorations around an AI toolkit utimately fizzled out, and I redirected my attention to [Rust and Ray Tracers](/topics/rust.md). The Python-based ML projects were ultimately unsatisfying - Python is a frustrating language to work with, and I was mostly using libraries instead of understanding concepts. Applying ML tooling can be useful, but I prefer to be able to build things myself - even if they won't match modern libraries, having a foundational and engineering-based understanding of modern ML is within reach. Recently I was inspired by the [llama.cpp](https://github.com/ggerganov/llama.cpp) project, which can run Meta's LLaMA models on a CPU with ChatGPT-like performance. The entire implementation is about 20k lines of C and C++, which points to how accessible the core algorithms are - that includes support for various SIMD platforms, so the core inference logic is likely less than a few hundred lines of core mathematical code.
+
+To continue my learning here, I'm starting out from the other end - building a simple Tensor library in Rust. Coming from this direction builds off some existing engineering skills, versus trying to learn the ML and mathematics which has felt more abstract and inaccessible. I'm looking forward to diving into lower-level code (e.g compute shaders and SIMD instructions), and hopefully building towards something capable of doing inference of a (yet to be determined) simple ML model.
+
 ## 2022-01-07
 
 * Started setting up my ML toolkit repo using Poetry in an attempt to reduce the pain of conda/pip/etc and use a proper lockfile based dependency management approach. Lets see how this goes or if it's another rabbit hole...annoyingly looks like the Python community hasn't settled on any one tool (e.g there's pyenv, Pipenv, Poetry, PDM, and others all roughly in this space). Sigh. See [here](https://snarky.ca/classifying-python-virtual-environment-workflows/) for a breakdown of the options and [here](https://chriswarrick.com/blog/2023/01/15/how-to-improve-python-packaging/) for an opinionated walk through them all.

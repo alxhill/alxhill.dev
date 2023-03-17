@@ -10,6 +10,7 @@ Reverse chronological dev-log of my journey learning Rust in the hopes it's usef
 * [Writing a ray tracer in Rust](https://blog.singleton.io/posts/2022-01-02-raytracing-with-rust/)
 * [Parallelism in Rust with fork-join](https://publications.lib.chalmers.se/records/fulltext/219016/219016.pdf)
 * [Ray Tracing Gems II, free edbook from NVIDIA](https://developer.nvidia.com/ray-tracing-gems-ii)
+* [Rust Performance Book](https://nnethercote.github.io/perf-book/introduction.html)
 
 ### 2023-02-26
 
