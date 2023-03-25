@@ -11,10 +11,16 @@ Reverse chronological dev-log of my journey learning Rust in the hopes it's usef
 * [Parallelism in Rust with fork-join](https://publications.lib.chalmers.se/records/fulltext/219016/219016.pdf)
 * [Ray Tracing Gems II, free edbook from NVIDIA](https://developer.nvidia.com/ray-tracing-gems-ii)
 * [Rust Performance Book](https://nnethercote.github.io/perf-book/introduction.html)
+* [Bunch of SIMD/Ray Tracing links I don't want to lose](https://www.one-tab.com/page/GzBTSKNRS6Sh0aJ79bKVCQ)
+
+### 2023-03-25
+
+* Got GPT-4 to implement an axis-aligned box implementation - had a couple bugs in it, but was able to resolve them itself by telling it that something was broken. At first, the normals were wrong so it adjusted the code to handle faces correctly - clever. It struggled to figure out the floating point precision issue (the code used 0.0 as `tmin` instead of an epsilon value), but did fix it when given more detail.
+* I'd like to get a WASM version on this page at some point. Might be time to switch to Next.js/Vercel for hosting if I can avoid bike shedding it too much, or just embed a bunch of JS/HTML somewhere.
 
 ### 2023-02-26
 
-Briefly spent some time parallelising the renderer. As a naive approach, simply used a library called `rayon` to switch from iterating over one pixel at a time to a "parallel iterator" which can handle distributing work across threads, with work-stealing to avoid downtime.
+Briefly spent some time parallelising the renderer. As a naive approach, used a library called [`rayon`](https://docs.rs/rayon/latest/rayon/) to switch from iterating over one pixel at a time to a "parallel iterator" which can handle distributing work across threads, with work-stealing to avoid downtime.
 
 There were two pain-points here:
 1. I couldn't use mutable objects when sharing them across threads. This affected the sampler (which updates an index) and the output image view.
