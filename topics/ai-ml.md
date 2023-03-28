@@ -12,9 +12,14 @@ Reverse chronological dev-log of my journey trying to learn modern AI / ML topic
 * [Intro to Deep Learning](https://mlvu.github.io/lecture07/) (assuming knowledge of Neural Networks) - good explanation of Tensors.
 * Nice [NVIDIA blog post](https://developer.nvidia.com/blog/deep-learning-nutshell-core-concepts/) on CNNs/other foundational DNN stuff.
 * [Hacker News thread](https://news.ycombinator.com/item?id=34312248) asking for recommended books/resources/etc. Some interesting suggestions there.
-* [GPT is 60 lines of NumPY](https://jaykmody.com/blog/gpt-from-scratch/)
+* [GPT in 60 lines of NumPy](https://jaykmody.com/blog/gpt-from-scratch/)
 * [Attention is all you need](https://arxiv.org/pdf/1706.03762.pdf) - 2017 paper introducing the Transformer architecture.
 * [Andrej Karpathy's GPT from scratch video](https://www.youtube.com/watch?v=kCc8FmEb1nY)
+
+## 2023-03-27
+
+* Started work on a Rust-based Tensor library, originally wanting to fully replace code-based model definitions with pure-config defined execution of GPT-2 using the [60 line NumPy version](https://jaykmody.com/blog/gpt-from-scratch/). Instead, I think it'll be better to try and write it "from scratch" in Rust, and build the tools as I go, given rewriting a bunch of Python that I don't understand isn't proving super productive. Andrej Karpathy to the rescue.
+* Decided to name my tensor library "molten", because putting a torch to rusty metal = molten metal, and I'm trying to use Rust and Metal to replace Torch 🚀 (also, the "ten" at the end stands for Tensor).
 
 ## 2023-03-17
 
