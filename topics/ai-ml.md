@@ -15,6 +15,7 @@ Reverse chronological dev-log of my journey trying to learn modern AI / ML topic
 * [GPT in 60 lines of NumPy](https://jaykmody.com/blog/gpt-from-scratch/)
 * [Attention is all you need](https://arxiv.org/pdf/1706.03762.pdf) - 2017 paper introducing the Transformer architecture.
 * [Andrej Karpathy's GPT from scratch video](https://www.youtube.com/watch?v=kCc8FmEb1nY)
+* [NEON / Vector / SIMD overview and explanation blog post](https://community.arm.com/arm-community-blogs/b/operating-systems-blog/posts/arm-neon-programming-quick-reference)
 
 ## 2023-03-27
 
