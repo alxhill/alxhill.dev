@@ -13,6 +13,15 @@ Reverse chronological dev-log of my journey learning Rust in the hopes it's usef
 * [Rust Performance Book](https://nnethercote.github.io/perf-book/introduction.html)
 * [Bunch of SIMD/Ray Tracing links I don't want to lose](https://www.one-tab.com/page/GzBTSKNRS6Sh0aJ79bKVCQ)
 
+### Final Ray Tracer
+
+After compiling the ray tracer to WASM and adding some small additional JS, you can now run it live in any modern browser:
+
+<canvas id="raytracing" width="512" height="512"></canvas>
+<script src="/scripts/rt-wasm/bootstrap.js"></script>
+
+Pretty pleased with the end result, although I never got parallel rendering working I did enjoy learning a new language and building a medium-complexity project with it.
+
 ### 2023-03-25
 
 * Got GPT-4 to implement an axis-aligned box implementation - had a couple bugs in it, but was able to resolve them itself by telling it that something was broken. At first, the normals were wrong so it adjusted the code to handle faces correctly - clever. It struggled to figure out the floating point precision issue (the code used 0.0 as `tmin` instead of an epsilon value), but did fix it when given more detail.
