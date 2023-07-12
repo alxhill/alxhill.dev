@@ -18,7 +18,7 @@ Reverse chronological dev-log of my journey learning Rust in the hopes it's usef
 After compiling the ray tracer to WASM and adding some small additional JS, you can now run it live in any modern browser:
 
 <canvas id="raytracing" width="512" height="512"></canvas>
-<script src="../scripts/rt-wasm/bootstrap.js"></script>
+<script src="./scripts/rt-wasm/bootstrap.js"></script>
 
 Pretty pleased with the end result, although I never got parallel rendering working I did enjoy learning a new language and building a medium-complexity project with it.
 
