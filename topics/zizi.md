@@ -6,12 +6,11 @@ This page is a reverse chronological log of the process of figuring it out.
 
 ### Links & Resources
 
-- Maximize OpenPose speed: https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/06_maximizing_openpose_speed.md
-- 2018 U-Net Paper for Pose to Image generation https://compvis.github.io/vunet/
-- PyTorch 2D/3D U-Net Segmentation tutorial (2020): https://towardsdatascience.com/creating-and-training-a-u-net-model-with-pytorch-for-2d-3d-semantic-segmentation-model-building-6ab09d6a0862
-- Train a conditional diffusion model from scratch: https://wandb.ai/capecape/train_sd/reports/How-To-Train-a-Conditional-Diffusion-Model-From-Scratch--VmlldzoyNzIzNTQ1
-- MosaicML Composer list of speedup techniques: https://github.com/mosaicml/composer
-- Impersonator++ - Motion Imitation Library? https://svip-lab.github.io/project/impersonator.html
+- [OpenPose GitHub page on inference speed](https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/06_maximizing_openpose_speed.md)
+- [2018 U-Net Paper for Pose to Image generation](https://compvis.github.io/vunet/)
+- [Weights & Biases Article on conditional diffusion training](https://wandb.ai/capecape/train_sd/reports/)How-To-Train-a-Conditional-Diffusion-Model-From-Scratch--VmlldzoyNzIzNTQ1
+- [MosaicML Composer list of speedup techniques](https://github.com/mosaicml/composer)
+- [Impersonator++ - Motion Imitation Library using GANs](https://svip-lab.github.io/project/impersonator.html)
 
 ## 2023-07-19
 
