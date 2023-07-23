@@ -12,6 +12,11 @@ This page is a reverse chronological log of the process of figuring it out.
 - [MosaicML Composer list of speedup techniques](https://github.com/mosaicml/composer)
 - [Impersonator++ - Motion Imitation Library using GANs](https://svip-lab.github.io/project/impersonator.html)
 
+## 2023-07-20
+
+- Moving from the UNet2D class to the UNet2DConditional doesn't seem as simple as I'd hoped. The UNet2D class basically took in raw image tensors, but for the conditional version it seems to expect an already-embedded vector to condition on. Unclear if I _need_ to use an Autoencoder / VAE system like Stable Diffusion does, or if I can just ignore all that for now & find some simpler ways to condition the unet.
+- One thought is that we don't really have to use openpose or densepose to condition the model, we can just as well do something super cheap like an edge-finding tool or segmentation model as a way to speed up the ETE process.
+
 ## 2023-07-19
 
 Going to try and find a better data source, and see how much more complex the model code is when trying to use the existing OpenPose / DensePose outputs to condition the model. In parallel, can investigate realtime OpenPose - [their repo](https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/06_maximizing_openpose_speed.md) seemed to suggest that ~15fps should be achievable, which would be more than enough for our use case.
