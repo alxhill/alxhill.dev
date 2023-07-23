@@ -22,11 +22,11 @@ After compiling the ray tracer to WASM and adding some small additional JS, you 
 
 _click to toggle rendering_
 
-Pretty pleased with the end result, although I didn't get fast parallel rendering working, I did enjoy learning a new language and building a medium-complexity project with it.
+Pretty pleased with the end result - works well enough and I started learning a new language by building a medium-complexity project.
 
-The performance numbers are also decent - ~550ms/frame on my M2 Air, and eyeballing it maybe 50% slower (800ms?) on an iPhone 14 Pro. For unoptimised single-threaded code on a CPU, that doesn't seem too bad.
+The performance numbers are also decent - ~550ms/frame on my M2 Air, and eyeballing it maybe 50% slower (800ms?) on an iPhone 14 Pro. For unoptimised single-threaded code on a CPU, that seems decent.
 
-Amusingly, the hardest part about getting it working on the web was not the Rust or WASM pieces, but browser API differences. // todo - finish this!
+Amusingly, the hardest part about getting it working on the web was not the Rust or WASM pieces, but browser API differences - Chrome and Safari play slightly differently when re-rendering an ImageBuffer if the underlying Uint8Array data changes. Chrome allows re-using all the objects, but for Safari I had to re-create the wrappers around the data each time.
 
 ### 2023-03-25
 
