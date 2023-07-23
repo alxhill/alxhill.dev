@@ -8,9 +8,11 @@ This page is a reverse chronological log of the process of figuring it out.
 
 - [OpenPose GitHub page on inference speed](https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/06_maximizing_openpose_speed.md)
 - [2018 U-Net Paper for Pose to Image generation](https://compvis.github.io/vunet/)
-- [Weights & Biases Article on conditional diffusion training](https://wandb.ai/capecape/train_sd/reports/)How-To-Train-a-Conditional-Diffusion-Model-From-Scratch--VmlldzoyNzIzNTQ1
+- [Weights & Biases Article on conditional diffusion training](https://wandb.ai/capecape/train_sd/reports/)
 - [MosaicML Composer list of speedup techniques](https://github.com/mosaicml/composer)
 - [Impersonator++ - Motion Imitation Library using GANs](https://svip-lab.github.io/project/impersonator.html)
+- [GitHub of some papers for realtime pose estimation](https://github.com/cbsudux/awesome-human-pose-estimation#real-time-pose-estimation)
+- [YouTube tutorial making a diffusion model from scratch (with simple conditioning)](https://www.youtube.com/watch?v=TBCRlnwJtZU)
 
 ## 2023-07-20
 
