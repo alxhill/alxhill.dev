@@ -1,8 +1,6 @@
 # Zizi.ai Model Training Dev Log
 
-Working with Jake Elwes on The Zizi Project, I'm working to figure out how we can get some kind of realtime performance of zizi.
-
-This page is a reverse chronological log of the process of figuring it out.
+Working with Jake Elwes on The Zizi Project, we're trying to build a realtime performance of zizi.
 
 ### Links & Resources
 
@@ -13,11 +11,16 @@ This page is a reverse chronological log of the process of figuring it out.
 - [Impersonator++ - Motion Imitation Library using GANs](https://svip-lab.github.io/project/impersonator.html)
 - [GitHub of some papers for realtime pose estimation](https://github.com/cbsudux/awesome-human-pose-estimation#real-time-pose-estimation)
 - [YouTube tutorial making a diffusion model from scratch (with simple conditioning)](https://www.youtube.com/watch?v=TBCRlnwJtZU)
+- [Conditional MNIST from scratch](https://github.com/TeaPearce/Conditional_Diffusion_MNIST)
+- [In-depth explanation of VAE / Diffusion Model Maths](https://towardsdatascience.com/generating-images-using-vaes-gans-and-diffusion-models-48963ddeb2b2)
+
+## 2023-07-24
+
+- Still struggling with creating a conditional model - using diffusers consistently OOMs when I add any value for the "encoder hidden states" value & creating a VAE also oomd trying to encode a single image. I'm sure I'm doing lots wrong but so hard to know what, and none of the guides so far are at the right level (eather too basic or too complex/abstract).
 
 ## 2023-07-23
 
 - Did some brief inference perf testing & saw that the MPS backend can generate the meth/zizi images pretty quickly. torch.compile ran slower on my M1 mac but probably works much better on CUDA. Needed to pass in some weird `backend="aot_eager"` param to `torch.compile` to get it to work. [Link](https://github.com/pytorch/pytorch/pull/96980/files)
-
 
 ## 2023-07-20
 
