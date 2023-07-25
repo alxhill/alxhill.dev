@@ -13,10 +13,22 @@ Working with Jake Elwes on The Zizi Project, we're trying to build a realtime pe
 - [YouTube tutorial making a diffusion model from scratch (with simple conditioning)](https://www.youtube.com/watch?v=TBCRlnwJtZU)
 - [Conditional MNIST from scratch](https://github.com/TeaPearce/Conditional_Diffusion_MNIST)
 - [In-depth explanation of VAE / Diffusion Model Maths](https://towardsdatascience.com/generating-images-using-vaes-gans-and-diffusion-models-48963ddeb2b2)
+- [❗️ Annotated PyTorch Paper Explanations](https://nn.labml.ai/)
+
+## 2023-07-25
+
+- Midnight breakthrough! Trained 5 epochs with pose conditioning and it's working surprisingly well. Here's an original image and the produced output using only the pose:
+
+![raw_img](zizi/pose-v1/raw.png)
+![sample_1](zizi/pose-v1/sample-1.png)
+![sample_2](zizi/pose-v1/sample-2.png)
+
+This would need much more training & much much higher resolution to be actually useful, but as a POC I'm pretty happy! Worth noting that this is also still all in pixel space, so we haven't done any encoding/decoding into a lower res latent space which would make higher resolution images possible.
 
 ## 2023-07-24
 
 - Still struggling with creating a conditional model - using diffusers consistently OOMs when I add any value for the "encoder hidden states" value & creating a VAE also oomd trying to encode a single image. I'm sure I'm doing lots wrong but so hard to know what, and none of the guides so far are at the right level (eather too basic or too complex/abstract).
+- Resolved! There were a few things going wrong, as expected. First, the model was huge due to a cross_attention_dim param that defaulted to 1280. Secondly, PyTorch seems to have a weird bug that consistently OOMed on CPUs but not on CUDA (in spite of having much less CUDA memory). Finally, we figured out that the `encoder_hid_dim` param on the UNet2DConditional class allowed us to tell the model what the third param needed to be. I don't expect this to provide particularly good results (afact the `encoder_hidden_states` is for providing latents, not conditions - but this can be a fun little test right? 😇)
 
 ## 2023-07-23
 
