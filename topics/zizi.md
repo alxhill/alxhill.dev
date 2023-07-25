@@ -19,9 +19,9 @@ Working with Jake Elwes on The Zizi Project, we're trying to build a realtime pe
 
 - Midnight breakthrough! Trained 5 epochs with pose conditioning and it's working surprisingly well. Here's an original image and the produced output using only the pose:
 
-![raw_img](zizi/pose-v1/raw.png)
-![sample_1](zizi/pose-v1/sample-1.png)
-![sample_2](zizi/pose-v1/sample-2.png)
+![raw_img](/docs/assets/images/zizi/pose-v1/raw.png)
+![sample_1](/docs/assets/images/zizi/pose-v1/sample-1.png)
+![sample_2](/docs/assets/images/zizi/pose-v1/sample-2.png)
 
 This would need much more training & much much higher resolution to be actually useful, but as a POC I'm pretty happy! Worth noting that this is also still all in pixel space, so we haven't done any encoding/decoding into a lower res latent space which would make higher resolution images possible.
 
