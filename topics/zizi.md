@@ -19,6 +19,8 @@ Working with Jake Elwes on The Zizi Project, we're trying to build a realtime pe
 
 - Midnight breakthrough! Trained 5 epochs with pose conditioning and it's working surprisingly well. This would need much more training & much much higher resolution to be actually useful, but as a POC I'm pretty happy! Worth noting that this is also still all in pixel space, so we haven't done any encoding/decoding into a lower res latent space which would make higher resolution images possible.
 
+- Now trying out training at 512x512 resolution on an A6000 with 48GB RAM 🤑. And using better source images courtesy of Jake!
+
 ## 2023-07-24
 
 - Still struggling with creating a conditional model - using diffusers consistently OOMs when I add any value for the "encoder hidden states" value & creating a VAE also oomd trying to encode a single image. I'm sure I'm doing lots wrong but so hard to know what, and none of the guides so far are at the right level (eather too basic or too complex/abstract).
