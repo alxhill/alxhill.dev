@@ -16,6 +16,11 @@ Working with Jake Elwes on The Zizi Project, we're trying to build a realtime pe
 - [❗️ Annotated PyTorch Paper Explanations](https://nn.labml.ai/)
 - [SD XL Paper - lots of readable content / links on how they improved or changed the model for better performance][https://github.com/Stability-AI/generative-models/blob/main/assets/sdxl_report.pdf]
 
+## 2023-07-26
+
+- Lets try with a VAE! First gonna train with the SD VAE and then if that gets decent results can train our own (probably smaller given very limited dataset content). One thought: VAEs encode spacially - which makes sense for detail that can be anywhere in an image. But our images don't have detail everywhere, just where the person is. So there'll be too much latent info in the blank bits and too little in the high-detail sections. Here's how SD's VAE encodes a frame of a video we'll be encoding:
+  ![VAE demonstration](/docs/assets/images/zizi/vae.png)
+
 ## 2023-07-25
 
 - Midnight breakthrough! Trained 5 epochs with pose conditioning and it's working surprisingly well. This would need much more training & much much higher resolution to be actually useful, but as a POC I'm pretty happy! Worth noting that this is also still all in pixel space, so we haven't done any encoding/decoding into a lower res latent space which would make higher resolution images possible.
