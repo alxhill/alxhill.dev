@@ -18,8 +18,8 @@ Working with Jake Elwes on The Zizi Project, we're trying to build a realtime pe
 ## 2023-07-25
 
 - Midnight breakthrough! Trained 5 epochs with pose conditioning and it's working surprisingly well. This would need much more training & much much higher resolution to be actually useful, but as a POC I'm pretty happy! Worth noting that this is also still all in pixel space, so we haven't done any encoding/decoding into a lower res latent space which would make higher resolution images possible.
-
 - Now trying out training at 512x512 resolution on an A6000 with 48GB RAM 🤑. And using better source images courtesy of Jake!
+- While the training run continues, I'm playing with stable diffusion's VAE & seeing what results we get. Pretty impressive overall - 48x fewer values and can recreate something close to the original image, although in this case the face is looking pretty poor. Presumably a well-trained VAE on exclusively zizi-like data would produce even better images (and due to the very limited content, potentially offer even better compression).
 
 ## 2023-07-24
 
