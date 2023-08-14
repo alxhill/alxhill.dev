@@ -16,6 +16,11 @@ Working with Jake Elwes on The Zizi Project, we're trying to build a realtime pe
 - [❗️ Annotated PyTorch Paper Explanations](https://nn.labml.ai/)
 - [SD XL Paper - lots of readable content / links on how they improved or changed the model for better performance][https://github.com/Stability-AI/generative-models/blob/main/assets/sdxl_report.pdf]
 
+## 2023-07-30
+
+- After like 45 epochs, the VAE models looked dramatically worse than the pixel models. While it did keep improving, the amount of time it took - and the _very_ blurry nature of that model - is concerning. Wondering if a) the UNet can't handle this data format as effectively / needs a lot more training to get something or b) the latents aren't high enough resolution or are all so close to each other in that latent space that we're massively harming the model by using it.
+- Two avenues to explore - does training our own VAE get anything decent in a reasonable amount of time? If so, are the latents good? Also, what do we get if we play with UNet architectures / maybe add some kind of upsampling directly into the UNet (e.g inputs are 256, train the UNet to produce 512 images & use loss on the original image size).
+
 ## 2023-07-26
 
 - Lets try with a VAE! First gonna train with the SD VAE and then if that gets decent results can train our own (probably smaller given very limited dataset content). One thought: VAEs encode spacially - which makes sense for detail that can be anywhere in an image. But our images don't have detail everywhere, just where the person is. So there'll be too much latent info in the blank bits and too little in the high-detail sections. Here's how SD's VAE encodes a frame of a video we'll be encoding:
