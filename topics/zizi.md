@@ -14,7 +14,8 @@ Working with Jake Elwes on The Zizi Project, we're trying to build a realtime pe
 - [Conditional MNIST from scratch](https://github.com/TeaPearce/Conditional_Diffusion_MNIST)
 - [In-depth explanation of VAE / Diffusion Model Maths](https://towardsdatascience.com/generating-images-using-vaes-gans-and-diffusion-models-48963ddeb2b2)
 - [❗️ Annotated PyTorch Paper Explanations](https://nn.labml.ai/)
-- [SD XL Paper - lots of readable content / links on how they improved or changed the model for better performance][https://github.com/Stability-AI/generative-models/blob/main/assets/sdxl_report.pdf]
+- [SD XL Paper - lots of readable content / links on how they improved or changed the model for better performance](https://github.com/Stability-AI/generative-models/blob/main/assets/sdxl_report.pdf)
+- [U-ViT GitHub - has training + eval scripts for pixel & latent models with a better arch](https://github.com/baofff/U-ViT)
 
 ## 2023-07-30
 

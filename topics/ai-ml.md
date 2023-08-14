@@ -17,6 +17,7 @@ Reverse chronological dev-log of my journey trying to learn modern AI / ML topic
 * [Andrej Karpathy's GPT from scratch video](https://www.youtube.com/watch?v=kCc8FmEb1nY)
 * [NEON / Vector / SIMD overview and explanation blog post](https://community.arm.com/arm-community-blogs/b/operating-systems-blog/posts/arm-neon-programming-quick-reference)
 * [Transformers from Scratch](https://e2eml.school/transformers.html)
+* [Llama from scratch (or how to implement a paper without crying)](https://blog.briankitano.com/llama-from-scratch/)
 
 ## 2023-03-27
 
