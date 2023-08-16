@@ -19,8 +19,15 @@ Working with Jake Elwes on The Zizi Project, we're trying to build a realtime pe
 
 ## 2023-08-16
 
-- After looking into VAEs, I think we should stick with a pixel-model for now - latents add a lot of complexity (and slower inference as we have to decode after denoising). Additionally, my first attempt at training one had much worse results.
-- The model I've been using has only had self attention blocks in the down/up-scale parts of the UNet. Switching to CrossAttn blocks (which is what SD uses exclusively) has not been successful. Either it OOMs trying to allocate space, or the loss stays fixed at 1 (and output images are 100% noise) after training. Strange. Wondering if the fact that the pose values are entirely unscaled has any negative impact? The model is otherwise very similar to the non-cross attention one.
+### Modeling
+
+- I think we should stick with a pixel-model for now - latents add a lot of complexity (and slower inference as we have to decode after denoising).
+- The model I've been using has only had self attention blocks in the down/up-scale parts of the UNet. Switching to cross attention blocks (which is what SD uses) has not been successful. Either it OOMs trying to allocate memory for the blocks, or the loss stays fixed at 1 (and output images are 100% noise) when training. Wondering if the fact that the pose values are entirely unscaled has any big impact? The model is otherwise very similar to the non-cross attention one.
+- It also seems weird that the Stable Diffusion UNet doesn't declare the encoder dimensions or anything...not clear to me how the values align there.
+- Wondering if building up a UNet from scratch (vs using diffusers) might be a useful exercise in both understanding it better and also having more control/ability to debug when things don't work as expected. Might be painful though.
+
+### Realtime Rendering
+
 - For the realtime rendering, assuming we have a blackbox model that generates X images per batch and runs in 1 second, we can create a simple video stream by just sampling "latest X frames" from two buffers.
   - The video stream produces frames at a constant rate (say, 16 fps). A frame-consumer fetches the last second of frames, and filters them down to the number of images a single batch can process (X frames).
   - We run the X frames through the model, receiving X output frames ~one second later.
