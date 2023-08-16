@@ -17,9 +17,21 @@ Working with Jake Elwes on The Zizi Project, we're trying to build a realtime pe
 - [SD XL Paper - lots of readable content / links on how they improved or changed the model for better performance](https://github.com/Stability-AI/generative-models/blob/main/assets/sdxl_report.pdf)
 - [U-ViT GitHub - has training + eval scripts for pixel & latent models with a better arch](https://github.com/baofff/U-ViT)
 
+## 2023-08-16
+
+- After looking into VAEs, I think we should stick with a pixel-model for now - latents add a lot of complexity (and slower inference as we have to decode after denoising). Additionally, my first attempt at training one had much worse results.
+- The model I've been using has only had self attention blocks in the down/up-scale parts of the UNet. Switching to CrossAttn blocks (which is what SD uses exclusively) has not been successful. Either it OOMs trying to allocate space, or the loss stays fixed at 1 (and output images are 100% noise) after training. Strange. Wondering if the fact that the pose values are entirely unscaled has any negative impact? The model is otherwise very similar to the non-cross attention one.
+- For the realtime rendering, assuming we have a blackbox model that generates X images per batch and runs in 1 second, we can create a simple video stream by just sampling "latest X frames" from two buffers.
+  - The video stream produces frames at a constant rate (say, 16 fps). A frame-consumer fetches the last second of frames, and filters them down to the number of images a single batch can process (X frames).
+  - We run the X frames through the model, receiving X output frames ~one second later.
+  - The playback reads frames at a fixed interval from the output buffer. The output buffer. If there are no new frames in time, it uses the most recently returned value. Each time there's a new batch of images, the buffer is replaced entirely.
+  - In this model, the latency would be 3 seconds - one for the input, one for the model execution, another for the output buffer.
+- However, if we have a timestep-based diffusion model, we can use the timestepping to decrease latency. For the method above, our output stream must be 2\*batch time behind the model (buffer + model runtime - basically we need to be playing a full second of video while the next second is processed). Instead of reading X frames in one go, after the initial batch we add one new frame and remove one completed frame at each timestep. This means both the input and output buffer need only a single frame (+ whatever padding improves stability) to be able to generate the video. This requires the total model runtime being relatively fast, but instead of 3\*model_latency we get model_latency + timestep_latency as our performance bound.
+- If a non-diffusion model is either substantially faster or not improved by batching, then there's a big advantage to doing the naive "process the most recent ready frame and push them out" kind of approach.
+
 ## 2023-07-30
 
-- After like 45 epochs, the VAE models looked dramatically worse than the pixel models. While it did keep improving, the amount of time it took - and the _very_ blurry nature of that model - is concerning. Wondering if a) the UNet can't handle this data format as effectively / needs a lot more training to get something or b) the latents aren't high enough resolution or are all so close to each other in that latent space that we're massively harming the model by using it.
+- After like 45 epochs, the VAE models looked dramatically worse than the pixel models. While it did keep improving, the amount of time it took - and the _very_ blurry nature of that model - is concerning. Wondering if a. the UNet can't handle this data format as effectively / needs a lot more training to get something or b. the latents aren't high enough resolution or are all so close to each other in that latent space that we're massively harming the model by using it.
 - Two avenues to explore - does training our own VAE get anything decent in a reasonable amount of time? If so, are the latents good? Also, what do we get if we play with UNet architectures / maybe add some kind of upsampling directly into the UNet (e.g inputs are 256, train the UNet to produce 512 images & use loss on the original image size).
 
 ## 2023-07-26
