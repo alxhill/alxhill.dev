@@ -16,6 +16,7 @@ Working with Jake Elwes on The Zizi Project, we're trying to build a realtime pe
 - [❗️ Annotated PyTorch Paper Explanations](https://nn.labml.ai/)
 - [SD XL Paper - lots of readable content / links on how they improved or changed the model for better performance](https://github.com/Stability-AI/generative-models/blob/main/assets/sdxl_report.pdf)
 - [U-ViT GitHub - has training + eval scripts for pixel & latent models with a better arch](https://github.com/baofff/U-ViT)
+- [Deeper dive into diffusers / training](https://github.com/huggingface/diffusion-models-class/blob/main/unit1/01_introduction_to_diffusers.ipynb)
 
 ## 2023-08-16
 
