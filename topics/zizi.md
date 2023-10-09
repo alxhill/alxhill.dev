@@ -20,6 +20,13 @@ Working with Jake Elwes on The Zizi Project, we're trying to build a realtime pe
 - [UNetCondition2D rewritten to be simpler](https://github.com/cloneofsimo/minSDXL)
 - [Curated Transformers library - huggingface but if the code was good. LLMs only at the moment](https://github.com/explosion/curated-transformers)
 
+## 2023-10-09
+
+- Few weeks since I've written anything about the status here. Key changes:
+  - Jake has trained a vid2vid model that only takes in the openpose and had some good results - pretty close to the full denspose + flownet + openpose models used before. The performance is also good (~2.6fps on his 1080 Ti GPU). Will likely end up using this model over the diffusion models for realtime perf, given the challenges both training and using a diffusion model for inference.
+  - Getting the vid2vid code to _work_ without resorting to the wild west of very specific versions of every dependency was...a challenge. Thankfully we got it working in the end without using the messy scripts and AWS AMIs Jake used, and I've added a `pyproject.toml` file to the repo to ease reproducability (tbd on if it genuinely does, but it's at least a better foundation).
+  - The OpenPose codebase will be annoying to get working - it uses the CMake GUI to build and hasn't been updated in a while. Sigh. Plus will need to be built with GPU (i.e CUDA) support, might not be possible from a macOS host.
+
 ## 2023-08-16
 
 ### Modeling
