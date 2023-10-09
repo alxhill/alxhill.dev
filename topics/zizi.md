@@ -17,6 +17,8 @@ Working with Jake Elwes on The Zizi Project, we're trying to build a realtime pe
 - [SD XL Paper - lots of readable content / links on how they improved or changed the model for better performance](https://github.com/Stability-AI/generative-models/blob/main/assets/sdxl_report.pdf)
 - [U-ViT GitHub - has training + eval scripts for pixel & latent models with a better arch](https://github.com/baofff/U-ViT)
 - [Deeper dive into diffusers / training](https://github.com/huggingface/diffusion-models-class/blob/main/unit1/01_introduction_to_diffusers.ipynb)
+- [UNetCondition2D rewritten to be simpler](https://github.com/cloneofsimo/minSDXL)
+- [Curated Transformers library - huggingface but if the code was good. LLMs only at the moment](https://github.com/explosion/curated-transformers)
 
 ## 2023-08-16
 
@@ -24,7 +26,7 @@ Working with Jake Elwes on The Zizi Project, we're trying to build a realtime pe
 
 - I think we should stick with a pixel-model for now - latents add a lot of complexity (and slower inference as we have to decode after denoising).
 - The model I've been using has only had self attention blocks in the down/up-scale parts of the UNet. Switching to cross attention blocks (which is what SD uses) has not been successful. Either it OOMs trying to allocate memory for the blocks, or the loss stays fixed at 1 (and output images are 100% noise) when training. Wondering if the fact that the pose values are entirely unscaled has any big impact? The model is otherwise very similar to the non-cross attention one.
-- It also seems weird that the Stable Diffusion UNet doesn't declare the encoder dimensions or anything...not clear to me how the values align there.
+- It also seems weird that the Stable Diffusion UNet doesn't declare the encoder dimensions or anything...not clear to me how the values align there. UPDATE: The text encoder produces vectors of 768 elements, and the cross attention dim of the model is also 768.
 - Wondering if building up a UNet from scratch (vs using diffusers) might be a useful exercise in both understanding it better and also having more control/ability to debug when things don't work as expected. Might be painful though.
 
 ### Realtime Rendering
