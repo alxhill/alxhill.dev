@@ -61,17 +61,17 @@ I solved the first issue by making the sampler store an `AtomicU32` instead of a
 The compiler helpfully informed me that the issue with `Scene` not implementing `Sync` was all the way down in my `Object` type:
 
 ```rust
-   = help: the trait `Sync` is not implemented for `(dyn Shadeable + 'static)`
-   = note: required for `Arc<(dyn Shadeable + 'static)>` to implement `Sync`
-   = note: required because it appears within the type `Option<Arc<(dyn Shadeable + 'static)>>`
-   = note: required because it appears within the type `Object`
-   = note: required for `Unique<Object>` to implement `Sync`
-   = note: required because it appears within the type `alloc::raw_vec::RawVec<Object>`
-   = note: required because it appears within the type `Vec<Object>`
-   = note: required because it appears within the type `rust_raytracing::Scene`
-   = note: required because it appears within the type `&rust_raytracing::Scene`
-   = note: required because it appears within the type `RenderContext<'_, rust_raytracing::MultiJittered, rust_raytracing::PinholeCamera>`
-note: required by a bound in `render_parallel`
+   = help: the trait Sync is not implemented for (dyn Shadeable + 'static)
+   = note: required for Arc<(dyn Shadeable + 'static)> to implement Sync
+   = note: required because it appears within the type Option<Arc<(dyn Shadeable + 'static)>>
+   = note: required because it appears within the type Object
+   = note: required for Unique<Object> to implement Sync
+   = note: required because it appears within the type alloc::raw_vec::RawVec<Object>
+   = note: required because it appears within the type Vec<Object>
+   = note: required because it appears within the type rust_raytracing::Scene
+   = note: required because it appears within the type &rust_raytracing::Scene
+   = note: required because it appears within the type RenderContext<'_, rust_raytracing::MultiJittered, rust_raytracing::PinholeCamera>
+note: required by a bound in render_parallel
 ```
 
 The core issue is that `Object` looks like this:
@@ -86,7 +86,7 @@ pub struct Object {
 
 Specifically, the trait `Shadeable` can be implemented by any type - including ones that are not safe to send between threads. At first I thought this was inherent in how `dyn` worked, so rewrote the Material system to be an enum instead of an `Arc`. This worked fine, but does mean that Materials have to take up much more space than they need (e.g a `Normal` material has no fields, while a `Phong` has to leave space for two lambertian BDRFs, a glossy BDRF and an optional PerfectlySpecular BDRF - a total of 5 doubles and 4 colors). At the scale of this project, that doesn't realluy matter, but it seems preferable to share materials rather than copy them around with so much extra padding.
 
-The alternative solution was much simpler - make Shadeable require `Sync + Send`. Because none of the Materials do any mutation, no other 
+The alternative solution was much simpler - make Shadeable require `Sync + Send`. Because none of the Materials do any mutation, no other code needed:
 
 ```rust
 pub trait Shadeable: Debug + Sync + Send {
