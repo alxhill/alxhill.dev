@@ -6,6 +6,12 @@
 - [Metal Sample Code](https://developer.apple.com/metal/sample-code/)
 - [Performing Calculations on a GPU - sample code](https://developer.apple.com/documentation/metal/performing_calculations_on_a_gpu)
 
+## 2023-11-11
+
+* Got the code into a more usable structure moving forwards - can now easily test many separate GPU functions without starting from scratch each time. Also having fun hitting the many rough edges of C++ - e.g (you can't call virtual methods from a constructor)[https://stackoverflow.com/questions/14549489/how-to-fix-pure-virtual-function-called-runtime-error], but it just fails at runtime with no compiler warnings if you do despite this being a Known Limitation.
+* Tested different batch sizes running the GPU double function. Got best performance out of 128, but still roughly 4x slower than just cpu (300µs vs 1100µs for 1048576 elements). At 1024 performance started degrading again.
+* Not sure what the best next-step is for an actual GPU sort. Maybe a small 64 element sort written in Metal, which could later compose into something larger?
+
 ## 2023-11-10
 
 Today: lets get started on writing a sort in Metal and see how far we can get.
