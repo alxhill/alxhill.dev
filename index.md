@@ -4,10 +4,11 @@ Small site for things I'm working on/thinking about. Mostly for my own records.
 
 ### Thought Stream / Dev Log
 
+- [Metal / Sorting / Splats](topics/metal-splats)
 - [Realtime Zizi](topics/zizi)
-- [WebGPU](topics/web-gpu)
+- [WebGPU](topics/web-gpu) (⏸️ paused)
 - [Rust and Ray Tracing](topics/rust) - project completed 🎉
-- [AI / ML / Stable Diffusion](topics/ai-ml)
+- [AI / ML / Stable Diffusion](topics/ai-ml) (⏸️ paused)
 
 ### Long Form Posts
 
