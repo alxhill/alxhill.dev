@@ -39,6 +39,7 @@ Today: lets get started on writing a sort in Metal and see how far we can get.
 * Now trying to figure out how to split the work into blocks. Have a simple version that does 2 elements at a time, still not sure what the optimal split would be (or, how I should do the parallel sort piece).
 
 Doubling 16777216 values:
+
 | Elements | GPU | CPU |
 |--|--|--|
 | 1  | 9460µs | 4437µs |
