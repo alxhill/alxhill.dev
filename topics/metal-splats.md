@@ -5,6 +5,19 @@
 - [Apple Metal-cpp home page](https://developer.apple.com/metal/cpp/)
 - [Metal Sample Code](https://developer.apple.com/metal/sample-code/)
 - [Performing Calculations on a GPU - sample code](https://developer.apple.com/documentation/metal/performing_calculations_on_a_gpu)
+- [Simple GPU Sorting Tutorial in O(n^2)](https://www.alanzucconi.com/2017/12/13/gpu-sorting-1/)
+
+## 2023-11-12
+
+* Found a simple O(n^2) parallel sort that iteratively swaps values in each pass. Well suited to GPUs and a good sorting litmus test.
+* Had some fun getting the implementation working - usual C++ sharp edges, e.g had an m_data_buffer private member that hid the value in the parent class causing segfaults, and some other general structure / who-does-what kind of problems. Overall, it works! However, it's currently hilariously slow compared to the CPU radix sort implementation:
+
+| Elements | CPU | GPU |
+|--|--|--|
+| 32    | 1µs    | 5773µs    |
+| 65536 | 4993µs | 9034348µs |
+
+* I think this is more likely to be a problem with the way I'm implementing the two-pass system, encoding each command one-by-one and waiting for completion. The fact that even the 32 element version (which is just 32 passes through a very small amount of data) takes so long implies to me that this is all overhead, not any actual problem with the compute. To test out this theory, will need to refactor the whole thing to push all the passes onto the command queue at once.
 
 ## 2023-11-11
 
@@ -24,9 +37,9 @@ Today: lets get started on writing a sort in Metal and see how far we can get.
 Doubling 16777216 values:
 | Elements | GPU | CPU |
 |--|--|--|
-| 1 | 9460µs | 4437µs |
-| 2 | 8536µs | 3672µs |
-| 8 | 7877μs | 3148μs |
+| 1  | 9460µs | 4437µs |
+| 2  | 8536µs | 3672µs |
+| 8  | 7877μs | 3148μs |
 | 64 | 9367µs | 3747µs |
 
 (the CPU value should technically be the same every time, so this really just shows some of the variance in this simple testing script).
