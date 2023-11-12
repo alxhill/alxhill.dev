@@ -10,14 +10,17 @@
 ## 2023-11-12
 
 * Found a simple O(n^2) parallel sort that iteratively swaps values in each pass. Well suited to GPUs and a good sorting litmus test.
-* Had some fun getting the implementation working - usual C++ sharp edges, e.g had an m_data_buffer private member that hid the value in the parent class causing segfaults, and some other general structure / who-does-what kind of problems. Overall, it works! However, it's currently hilariously slow compared to the CPU radix sort implementation:
+* Had some fun getting the implementation working - usual C++ sharp edges, e.g had an m_data_buffer private member that hid the value in the parent class causing segfaults, and some other general structure / who-does-what kind of problems. Overall, it works! However, it's currently hilariously slow compared to my CPU radix sort implementation:
 
 | Elements | CPU | GPU |
 |--|--|--|
 | 32    | 1µs    | 5773µs    |
-| 65536 | 4993µs | 9034348µs |
+| 65536 | 4993µs | 9034348µs (over 9 seconds) |
 
 * I think this is more likely to be a problem with the way I'm implementing the two-pass system, encoding each command one-by-one and waiting for completion. The fact that even the 32 element version (which is just 32 passes through a very small amount of data) takes so long implies to me that this is all overhead, not any actual problem with the compute. To test out this theory, will need to refactor the whole thing to push all the passes onto the command queue at once.
+* Looking at one of Apple's sample codes to figure out the right way to setup multiple commands on the GPU over the same data, (Image Filtering with Heaps and Events)[https://developer.apple.com/documentation/metal/memory_heaps/implementing_a_multistage_image_filter_using_heaps_and_events]. I don't quite get why they use this event thing to wait for compute, clearly something missing in my understanding of what guarantees the GPU is offering (maybe they're not using the waitUntilCompleted thing for faster perf?).
+* Switched to encoding two passes at a time, which executes but currently returns incorrect results. Sad. Perf seems better thought.
+* Fixed the two-pass implementation (wasn't actually using the odd pass kernel 🤦🏼‍♂️). It is faster! 4547352µs (~4.5 seconds) which is roughly half the previous time, suggesting my previous thesis of "it's all overhead not compute time" is correct. So, lets encode all the commands at once and see how that goes?
 
 ## 2023-11-11
 
