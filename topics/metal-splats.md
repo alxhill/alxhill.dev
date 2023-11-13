@@ -45,11 +45,11 @@ uniform vec3 Param2;
 uniform sampler2D Data;
 #define OwnPos gl_TexCoord[0]
 // contents of the uniform data fields
-#define TwoStage Param1.x    
-#define Pass_mod_Stage Param1.y  
-#define TwoStage_PmS_1 Param1.z  
-#define Width Param2.x  
-#define Height Param2.y  
+#define TwoStage Param1.x
+#define Pass_mod_Stage Param1.y
+#define TwoStage_PmS_1 Param1.z
+#define Width Param2.x
+#define Height Param2.y
 #define Pass Param2.z
 void main(void)  {
     // get self
