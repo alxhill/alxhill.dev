@@ -8,6 +8,7 @@
 - [Simple GPU Sorting Tutorial in O(n^2)](https://www.alanzucconi.com/2017/12/13/gpu-sorting-1/) - good first-attempt of non-optimal sorting, keeping within the constraints of non-compute shaders
 - [NVIDIA Improved GPU Sorting chapter from a book](https://developer.nvidia.com/gpugems/gpugems2/part-vi-simulation-and-numerical-algorithms/chapter-46-improved-gpu-sorting) - bit academic, but probably the best intro-to-advanced tutorial I've found.
 - [Academic paper comparing GPU sorting algorithms](https://www.researchgate.net/publication/220791500_Analysis_of_Fast_Parallel_Sorting_Algorithms_for_GPU_Architectures)
+- [WIP PR implementing ML metal compute kernels in HF Candle](https://github.com/huggingface/candle/pull/1230/files)
 
 ## 2023-11-12
 
@@ -76,7 +77,7 @@ void main(void)  {
 }
 ```
 
-This is called with some specific pass loops on the CPU. If you squint, this looks pretty similar to the code above with a few extra steps, so I'm assuming there's some aspect here about which sections of the texture are passed to the shader for performing the sort. The article itself seems focused on how to implement the algorithm efficiently using fragment and vertex shaders, and seems to have been written before the advent of GPGPU given the amount of time spent on optimal shader-first code. Interseting to see the considerations though, and I'd be curious to know how much is still relevant even when writing pure-compute shaders.
+This is called with some specific pass loops on the CPU. If you squint, this looks pretty similar to the code above with a few extra steps, so I'm assuming there's some aspect here about which sections of the texture are passed to the shader for performing the sort. The article itself seems focused on how to implement the algorithm efficiently using fragment and vertex shaders, and seems to have been written before the advent of GPGPU given the amount of time spent dealing with the specific restrictions they have. It is interesting to read about those considerations, and I'd be curious to know how much is still relevant even when writing pure-compute shaders.
 
 ### Development Log
 
