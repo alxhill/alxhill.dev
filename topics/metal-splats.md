@@ -9,6 +9,7 @@
 - [NVIDIA Improved GPU Sorting chapter from a book](https://developer.nvidia.com/gpugems/gpugems2/part-vi-simulation-and-numerical-algorithms/chapter-46-improved-gpu-sorting) - bit academic, but probably the best intro-to-advanced tutorial I've found.
 - [Academic paper comparing GPU sorting algorithms](https://www.researchgate.net/publication/220791500_Analysis_of_Fast_Parallel_Sorting_Algorithms_for_GPU_Architectures)
 - [WIP PR implementing ML metal compute kernels in HF Candle](https://github.com/huggingface/candle/pull/1230/files)
+- [Good slides on bitonic sorting](https://wiki.rice.edu/confluence/download/attachments/4435861/comp322-s12-lec28-slides-JMC.pdf?version=1&modificationDate=1333163955158) (linked from [here](https://people.cs.rutgers.edu/~venugopa/parallel_summer2012/bitonic_overview.html))
 
 ## 2023-11-12
 
