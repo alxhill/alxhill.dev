@@ -14,7 +14,7 @@
 
 The [NVIDIA book chapter](https://developer.nvidia.com/gpugems/gpugems2/part-vi-simulation-and-numerical-algorithms/chapter-46-improved-gpu-sorting) mentions two algorithms for sorting. The first is the O(n^2) technique covered in the [other blog post](https://www.alanzucconi.com/2017/12/13/gpu-sorting-1), which can be implemented trivially with a single shader (or with two that alternate, but I eventually realised you can just shift the offsets and grid size and re-use the same kernel the whole time.)
 
-```metal
+```c++
 kernel void slow_sort(device unsigned int* data, uint index [[thread_position_in_grid]])
 {
     uint idx = index*2;
@@ -23,6 +23,48 @@ kernel void slow_sort(device unsigned int* data, uint index [[thread_position_in
 
     data[idx] = min(left, right);
     data[idx+1] = max(left, right);
+}
+```
+_Side note: tested with an if/else implementation and it was consistently a few milliseconds faster (~275ms vs ~250ms)._
+
+This kernel must be run `n` times such that any element at the start of the list can swap it's way to the end.
+
+The "odd-even merge sort" is then described as an algorithm that sorts odd and even keys separately, then merges them. The stages are then scaled up in powers of two until the whole array is sorted. Unlike the previous algorithm this needs `log n` passes and results in an O(n^2 log n) runtime. The formatting for their code is broken - here's the (CUDA) kernel they provide that implements the algorithm:
+
+```c++
+uniform vec3 Param1;
+uniform vec3 Param2;
+uniform sampler2D Data;
+#define OwnPos gl_TexCoord[0]
+// contents of the uniform data fields
+#define TwoStage Param1.x    
+#define Pass_mod_Stage Param1.y  
+#define TwoStage_PmS_1 Param1.z  
+#define Width Param2.x  
+#define Height Param2.y  
+#define Pass Param2.z
+void main(void)  {
+    // get self
+    vec4 self = texture2D(Data, OwnPos.xy);
+    float i = floor(OwnPos.x * Width) + floor(OwnPos.y * Height) * Width;
+    // my position within the range to merge
+    float j = floor(mod(i, TwoStage));
+    float compare;
+    if ( (j < Pass_mod_Stage) || (j > TwoStage_PmS_1) )
+        // must copy -> compare with self
+        compare = 0.0;
+    else if ( mod((j + Pass_mod_Stage) / Pass, 2.0) < 1.0)
+        // we are on the left side -> compare with partner on the right
+        compare = 1.0;
+    else 
+        // we are on the right side -> compare with partner on the left
+        compare = -1.0;
+
+    // get the partner
+    float adr = i + compare * Pass;
+    vec4 partner = texture2D(Data, vec2(floor(mod(adr, Width)) / Width,floor(adr / Width) / Height));
+    // on the left it's a < operation; on the right it's a >= operation
+    gl_FragColor = (self.x * compare < partner.x * compare) ? self : partner;
 }
 ```
 
