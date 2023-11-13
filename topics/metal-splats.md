@@ -5,8 +5,9 @@
 - [Apple Metal-cpp home page](https://developer.apple.com/metal/cpp/)
 - [Metal Sample Code](https://developer.apple.com/metal/sample-code/)
 - [Performing Calculations on a GPU - sample code](https://developer.apple.com/documentation/metal/performing_calculations_on_a_gpu)
-- [Simple GPU Sorting Tutorial in O(n^2)](https://www.alanzucconi.com/2017/12/13/gpu-sorting-1/)
-- [NVIDIA Improved GPU Sorting chapter from a book](https://developer.nvidia.com/gpugems/gpugems2/part-vi-simulation-and-numerical-algorithms/chapter-46-improved-gpu-sorting)
+- [Simple GPU Sorting Tutorial in O(n^2)](https://www.alanzucconi.com/2017/12/13/gpu-sorting-1/) - good first-attempt of non-optimal sorting, keeping within the constraints of non-compute shaders
+- [NVIDIA Improved GPU Sorting chapter from a book](https://developer.nvidia.com/gpugems/gpugems2/part-vi-simulation-and-numerical-algorithms/chapter-46-improved-gpu-sorting) - bit academic, but probably the best intro-to-advanced tutorial I've found.
+- [Academic paper comparing GPU sorting algorithms](https://www.researchgate.net/publication/220791500_Analysis_of_Fast_Parallel_Sorting_Algorithms_for_GPU_Architectures)
 
 ## 2023-11-12
 
@@ -21,15 +22,23 @@ kernel void slow_sort(device unsigned int* data, uint index [[thread_position_in
     uint left = data[idx];
     uint right = data[idx+1];
 
+    if (left < right) {
+        data[idx] = left;
+        data[idx+1] = right;
+    } else {
+        data[idx] = right;
+        data[idx+1] = left;
+    }
+
     data[idx] = min(left, right);
     data[idx+1] = max(left, right);
 }
 ```
-_Side note: tested with an if/else implementation and it was consistently a few milliseconds faster (~275ms vs ~250ms)._
+_Side note: turns out the if/else implementation is consistently a few milliseconds faster (~275ms vs ~250ms) than the min/max approach, which is the opposite of what I'd have expected._
 
 This kernel must be run `n` times such that any element at the start of the list can swap it's way to the end.
 
-The "odd-even merge sort" is then described as an algorithm that sorts odd and even keys separately, then merges them. The stages are then scaled up in powers of two until the whole array is sorted. Unlike the previous algorithm this needs `log n` passes and results in an O(n^2 log n) runtime. The formatting for their code is broken - here's the (CUDA) kernel they provide that implements the algorithm:
+The "odd-even merge sort" is then described as an algorithm that sorts odd and even keys separately, then merges them. The stages are then scaled up in powers of two until the whole array is sorted. Unlike the previous algorithm this needs `log n` passes and results in an O(n^2 log n) runtime. The formatting for their code is broken - here's the (CUDA) kernel they provide that implements the algorithm (comments are theirs):
 
 ```c++
 uniform vec3 Param1;
@@ -67,6 +76,8 @@ void main(void)  {
     gl_FragColor = (self.x * compare < partner.x * compare) ? self : partner;
 }
 ```
+
+This is called with some specific pass loops on the CPU. If you squint, this looks pretty similar to the code above with a few extra steps, so I'm assuming there's some aspect here about which sections of the texture are passed to the shader for performing the sort. The article itself seems focused on how to implement the algorithm efficiently using fragment and vertex shaders, and seems to have been written before the advent of GPGPU given the amount of time spent on optimal shader-first code. Interseting to see the considerations though, and I'd be curious to know how much is still relevant even when writing pure-compute shaders.
 
 ### Development Log
 
