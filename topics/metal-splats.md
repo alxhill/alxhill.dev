@@ -34,7 +34,6 @@ kernel void slow_sort(device unsigned int* data, uint index [[thread_position_in
     data[idx+1] = max(left, right);
 }
 ```
-_Side note: turns out the if/else implementation is consistently a few milliseconds faster (~275ms vs ~250ms) than the min/max approach, which is the opposite of what I'd have expected._
 
 This kernel must be run `n` times such that any element at the start of the list can swap it's way to the end.
 
@@ -116,7 +115,12 @@ sort_radix() execution time: 96485 µs
 slow_sort_gpu() execution time: 26948016 µs
 ```
 
-Looks like the vast majority of the time is the compute, 9 microseconds vs 112 microseconds difference in encoding is a little over 10x for a data scale increase of 16.
+Looks like the vast majority of the time is the compute, 9 ms vs 112 ms difference in encoding is a little over 10x for a data scale increase of 16, but the compute time dwarfs it by an order of magnitude.
+
+Interestingly, it turns out that using an `if(a<b)` implementation is consistently a few milliseconds faster than an `x = max(a,b); y = min(a,b)` one (~275ms vs ~250ms), which is the opposite of what I'd have expected. Will need to enable profiling to understand what's going on here, interesting stuff.
+
+* As an optimisation, tested out writing to an internal buffer and then doing the sort passes entirely in private memory. My initial implementation is producing incorrect results, but does seem to be executing a lot faster - 14 seconds vs 26 seconds from above. One theory of why it's not working is that the memory barriers aren't setup correctly (so it's not waiting for each kernel to finish). Will test a simpler "copy kernel then normal swapping" approach before diving too far into this.
+* Realised my overly fancy copy thing probably wouldn't work, and instead did a separate copy-pass before the rest of the commands - sadly it still isn't getting correct results, and the perf gains seen before haven't been retained (not really sure _why_ given the bugs shouldn't have affected the number of encoded commands / total amount of compute), but broadly seems like this might not be a particularly effective optimisation. Sad. Gonna see if adding a fence makes it correct and then drop this branch.
 
 ## 2023-11-11
 
