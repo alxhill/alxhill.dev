@@ -6,8 +6,27 @@
 - [Metal Sample Code](https://developer.apple.com/metal/sample-code/)
 - [Performing Calculations on a GPU - sample code](https://developer.apple.com/documentation/metal/performing_calculations_on_a_gpu)
 - [Simple GPU Sorting Tutorial in O(n^2)](https://www.alanzucconi.com/2017/12/13/gpu-sorting-1/)
+- [NVIDIA Improved GPU Sorting chapter from a book](https://developer.nvidia.com/gpugems/gpugems2/part-vi-simulation-and-numerical-algorithms/chapter-46-improved-gpu-sorting)
 
 ## 2023-11-12
+
+### Algorithms / Reference
+
+The [NVIDIA book chapter](https://developer.nvidia.com/gpugems/gpugems2/part-vi-simulation-and-numerical-algorithms/chapter-46-improved-gpu-sorting) mentions two algorithms for sorting. The first is the O(n^2) technique covered in the [other blog post](https://www.alanzucconi.com/2017/12/13/gpu-sorting-1), which can be implemented trivially with a single shader (or with two that alternate, but I eventually realised you can just shift the offsets and grid size and re-use the same kernel the whole time.)
+
+```metal
+kernel void slow_sort(device unsigned int* data, uint index [[thread_position_in_grid]])
+{
+    uint idx = index*2;
+    uint left = data[idx];
+    uint right = data[idx+1];
+
+    data[idx] = min(left, right);
+    data[idx+1] = max(left, right);
+}
+```
+
+### Development Log
 
 * Found a simple O(n^2) parallel sort that iteratively swaps values in each pass. Well suited to GPUs and a good sorting litmus test.
 * Had some fun getting the implementation working - usual C++ sharp edges, e.g had an m_data_buffer private member that hid the value in the parent class causing segfaults, and some other general structure / who-does-what kind of problems. Overall, it works! However, it's currently hilariously slow compared to my CPU radix sort implementation:
@@ -43,6 +62,8 @@ sort_radix() execution time: 96485 µs
 [26947µs | Δ26834µs] - Execution completed
 slow_sort_gpu() execution time: 26948016 µs
 ```
+
+Looks like the vast majority of the time is the compute, 9 microseconds vs 112 microseconds difference in encoding is a little over 10x for a data scale increase of 16.
 
 ## 2023-11-11
 
