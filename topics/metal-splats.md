@@ -36,6 +36,37 @@ sort_radix() execution time: 523 ms
 sort_bitonic() execution time: 2297 ms
 ```
 
+Spent a little bit of time trying out some perf optimisations. Initially, the hot loop looked like this:
+
+```c++
+void bitonic_split(std::vector<unsigned int> &bitonic_seq, const int start, const int end, bool ascending) {
+    int diff = (end - start) / 2;
+    for (int i = start; i < start + diff; i++) {
+        int j = i + diff;
+        unsigned int left = bitonic_seq[i];
+        unsigned int right = bitonic_seq[j];
+        if (ascending) {
+            bitonic_seq[i] = std::min(left, right);
+            bitonic_seq[j] = std::max(left, right);
+        } else {
+            bitonic_seq[i] = std::max(left, right);
+            bitonic_seq[j] = std::min(left, right);
+        }
+    }
+}
+```
+
+The first thing I tried out was splitting into two separate functions (`bitonic_split_asc` and `bitonic_split_dec`), and using a single `if` statement for the swapping. I figured that would reduce branching and memory reads, but it had a neglible effect (both ran at about 2.6s for 16777216 uints). I also tried replacing the two if branches with a single more complex if (`if ((left < right && !ascending) || (right < left && ascending))`) and direct assignment. This was a lot _slower_ than the min/max approach (~3.3s). By _far_ the largest perf gain came from combining the min/max and the separate asc/dec functions:
+
+```
+Generating 16777216 random integers
+Generated 16777216 random integers
+std::sort() execution time: 348 ms
+sort_radix() execution time: 599 ms
+sort_bitonic() execution time: 1196 ms
+```
+
+An impressive 2x speedup for that change alone, contrary to expectations. I guess branch-prediction failures are much more expensive than the extra memory writes? And maybe something about the cache hierarchy makes writing/not writing fairly cheap.
 
 ## 2023-11-12
 
