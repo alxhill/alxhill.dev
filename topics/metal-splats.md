@@ -10,10 +10,11 @@
 - [Academic paper comparing GPU sorting algorithms](https://www.researchgate.net/publication/220791500_Analysis_of_Fast_Parallel_Sorting_Algorithms_for_GPU_Architectures)
 - [WIP PR implementing ML metal compute kernels in HF Candle](https://github.com/huggingface/candle/pull/1230/files)
 - [Good slides on bitonic sorting](https://wiki.rice.edu/confluence/download/attachments/4435861/comp322-s12-lec28-slides-JMC.pdf?version=1&modificationDate=1333163955158) (linked from [here](https://people.cs.rutgers.edu/~venugopa/parallel_summer2012/bitonic_overview.html))
+- [Bitonic sort for n not a power of 2](https://hwlang.de/algorithmen/sortieren/bitonic/oddn.htm)
 
 ## 2023-11-19
 
-* Now I have a reference CPU implementation time to try a GPU version. Initially I'm going to keep the kernel itself really simple, just taking in two buffers and sorting two values.
+* Now I have a reference CPU implementation time to try a GPU version. Initially I'm going to keep the kernel simple, just taking in two buffers and sorting values between them.
 
 ```c++
 kernel void bitonic_swap_asc(device unsigned int* left, device unsigned int* right, uint index [[thread_position_in_grid]])
@@ -26,6 +27,23 @@ kernel void bitonic_swap_asc(device unsigned int* left, device unsigned int* rig
 ```
 
 The complexity of which elements should be swapped will be encoded in the command buffer. This means the earlier layers will have many more commands (operating over less data though). Doubt this will be optimal but interested to see both if it's correct without any memory fences, and how it performs.
+
+* Somehow it worked perfectly first-try 🤯
+
+Performance wise, it's not good:
+```
+Generating 1048576 random integers
+Generated 1048576 random integers
+std::sort() execution time: 21 ms
+sort_radix() execution time: 35 ms
+sort_bitonic() execution time: 53 ms
+[0ms] - Starting bitonic encoding
+[2665ms | Δ2665ms] - Finished bitonic encoding
+[37180ms | Δ34515ms] - Bitonic execution completed
+bitonic_sort_gpu() execution time: 37180 ms
+```
+
+The previous O(n^2) GPU sort took around 27 seconds for 1 million values, while this method is taking over 37 seconds despite the fact it's meant to be O(n log^2 n). It's also weird just how long it's spending encoding the commands, so I suspect there's a bug where I'm encoding way too many commands but because it's idempotent it's not impacting the results.
 
 ## 2023-11-15
 
