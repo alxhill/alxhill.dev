@@ -11,10 +11,25 @@
 - [WIP PR implementing ML metal compute kernels in HF Candle](https://github.com/huggingface/candle/pull/1230/files)
 - [Good slides on bitonic sorting](https://wiki.rice.edu/confluence/download/attachments/4435861/comp322-s12-lec28-slides-JMC.pdf?version=1&modificationDate=1333163955158) (linked from [here](https://people.cs.rutgers.edu/~venugopa/parallel_summer2012/bitonic_overview.html))
 
+## 2023-11-19
+
+* Now I have a reference CPU implementation time to try a GPU version. Initially I'm going to keep the kernel itself really simple, just taking in two buffers and sorting two values.
+
+```c++
+kernel void bitonic_swap_asc(device unsigned int* left, device unsigned int* right, uint index [[thread_position_in_grid]])
+{
+    unsigned int l = left[index];
+    unsigned int r = right[index];
+    left[index] = min(l, r);
+    right[index] = max(l, r);
+}
+```
+
+The complexity of which elements should be swapped will be encoded in the command buffer. This means the earlier layers will have many more commands (operating over less data though). Doubt this will be optimal but interested to see both if it's correct without any memory fences, and how it performs.
+
 ## 2023-11-15
 
-* Think I have a handle on the bitonic sorting algorithm! Will start playing around with a CPU version before going for the GPU version.
-* Implemented a working CPU version after a couple of bugs. Did you know C++ vectors don't do bounds checks by default? I didn't and nor did my professional C++ programmer friend.
+* Implemented a working CPU version of the bitonic sort with only a few rounds of bugs. Did you know C++ vectors don't do bounds checks by default? I didn't and nor did my professional C++ programmer friend.
 
 Bitonic sort is ~3x slower than the other algorithms at this data scale:
 
