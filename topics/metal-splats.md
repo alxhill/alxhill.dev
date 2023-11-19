@@ -28,7 +28,7 @@ kernel void bitonic_swap_asc(device unsigned int* left, device unsigned int* rig
 
 The complexity of which elements should be swapped will be encoded in the command buffer. This means the earlier layers will have many more commands (operating over less data though). Doubt this will be optimal but interested to see both if it's correct without any memory fences, and how it performs.
 
-* Somehow it worked perfectly first-try 🤯
+* Somehow it worked first-try 🤯
 
 Performance wise, it's not good:
 ```
@@ -43,7 +43,7 @@ sort_bitonic() execution time: 53 ms
 bitonic_sort_gpu() execution time: 37180 ms
 ```
 
-The previous O(n^2) GPU sort took around 27 seconds for 1 million values, while this method is taking over 37 seconds despite the fact it's meant to be O(n log^2 n). It's also weird just how long it's spending encoding the commands, so I suspect there's a bug where I'm encoding way too many commands but because it's idempotent it's not impacting the results.
+The previous O(n^2) GPU sort took around 27 seconds for 1 million values, while this method is taking over 37 seconds despite the fact it's meant to be O(n log^2 n). It's also weird just how long it's spending encoding the commands, so I suspect there's a bug where I'm encoding way too many but because it's idempotent it's not impacting the results.
 
 ## 2023-11-15
 
