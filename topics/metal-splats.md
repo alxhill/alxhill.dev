@@ -14,7 +14,7 @@
 
 ## 2023-11-19
 
-* Now I have a reference CPU implementation time to try a GPU version. Initially I'm going to keep the kernel simple, just taking in two buffers and sorting values between them.
+* With the CPU reference implementation working, time to try a GPU version. Initially I'm going to keep the kernel simple, just taking in two buffers and sorting values between them.
 
 ```c++
 kernel void bitonic_swap_asc(device unsigned int* left, device unsigned int* right, uint index [[thread_position_in_grid]])
@@ -28,7 +28,7 @@ kernel void bitonic_swap_asc(device unsigned int* left, device unsigned int* rig
 
 The complexity of which elements should be swapped will be encoded in the command buffer. This means the earlier layers will have many more commands (operating over less data though). Doubt this will be optimal but interested to see both if it's correct without any memory fences, and how it performs.
 
-* Somehow it worked first-try 🤯
+Somehow it worked first-try! 🤯
 
 Performance wise, it's not good:
 ```
