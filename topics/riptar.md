@@ -38,6 +38,8 @@ extract the file into the directory no matter the order of the arguments).
 
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
 - [MiGZ repo](https://github.com/linkedin/migz)
+- [old parallel gzip repo](https://github.com/shevek/parallelgzip/blob/master/src/main/java/org/anarres/parallelgzip/ParallelGZIPOutputStream.java)
+- [zlib ng, faster/newer zlib implementation, supported by flate2](https://github.com/zlib-ng/zlib-ng)
 
 
 ## Dev Log
